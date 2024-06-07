@@ -4,21 +4,25 @@
 
 body{
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 80px;
     background: linear-gradient(150deg , #003E38 10%, #003E38 14%,#014E46 28%,  #00766A 41%, #004E46 55%, #035149 62%, #035149 75% , #003E38 80%, #002924 99%);
 
 }
 header {
     display: flex;
+    
     justify-content: space-between;
     align-items: center;
     background-color: #00453F;
     padding: 20px 10px;
-    margin: 50px;
+    left: 20%;
+    /* margin: 50px; */
     border-radius: 54px;
 }
 
 header a {
-    /* display: flex; */
     justify-content: space-between;
     text-align: center;
     padding: 12px;
@@ -56,8 +60,6 @@ header img{
 .first{
     display: flex;
     margin-top: 150px;
-    margin-left: 100px;
-    margin-right: 100px;
     
 }
 .second{
@@ -112,8 +114,10 @@ header img{
     box-shadow: 5px 5px 5px 0px #013E38;
 }
 
-.first .image {
-    /* margin-top: 50px; */
+.first .image img{
+    width: 100%;
+    /* height: 50px; */
+    background-color: red;
 }
 
 
@@ -192,9 +196,7 @@ header img{
 }
 
 .four{
-    /* width: 100vw; */
-    /* height: 100vh; */
-    /* width: 25%; */
+    width: 25%;
     width: 40%;
     display: flex;
     justify-content: center;
@@ -204,6 +206,7 @@ header img{
     margin-right: 100px;
     
 }
+
 
 .four h1{
     text-align: center;
@@ -220,3 +223,19 @@ header img{
     font-size: 24px;
     margin-bottom: 5px;
 }
+
+
+/* @media screen and (max-width: 1000px) {
+    .first{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: red;
+        
+    }
+    .first img{
+        width: 80%; 
+        
+    }
+  } */
