@@ -22,7 +22,6 @@ body {
     background-color: #00453F64;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     border-radius: 40px;
 }
 
@@ -43,10 +42,10 @@ body {
     scroll-snap-align: start;
 }
 
-.overflow-style {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+.users-display::-webkit-scrollbar {
+    display: none;
 }
+
 
 .users-display {
     width: 100%;
@@ -131,7 +130,8 @@ body {
     width: 60%;
     height: 100vh;
     display: flex;
-    background-color: #00453F64;
+    /* background-color: #00453F64; */
+    background: radial-gradient(circle at top left, #053732, #006C6199, #0E867985, #3DBDA700);
     justify-content: center;
     border-radius: 24px;
     flex-direction: column;
@@ -139,15 +139,7 @@ body {
     overflow: hidden;
 }
 
-.text-chat {
-    display: flex;
-    border-radius: 24px;
-    overflow: hidden;
-    background-color: #00453F64;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .messages {
     flex: 1 1 auto;
@@ -161,12 +153,11 @@ body {
 }
 
 .messages-content {
-    overflow-y: scroll;
+    overflow-y:scroll;
 }
 
 .messages-content::-webkit-scrollbar {
     display: none;
-    width: 12px;
 }
 
 .messages .messages-content {
@@ -269,7 +260,6 @@ body {
 
 .message-box .message-input::-webkit-scrollbar {
     display: none;
-    width: 12px;
 }
 
 .message-box .message-submit {
