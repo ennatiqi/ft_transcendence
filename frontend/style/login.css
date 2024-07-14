@@ -231,7 +231,7 @@ button.ghost {
 	border-radius: 20px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
+	/* position: relative; hadi tatkhlih mayban ?? */
 	overflow: hidden;
 	width: 70%;
 	height: 80%;

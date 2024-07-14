@@ -13,45 +13,5 @@ buttons.forEach(function(btn){
     });
 });
 
-var todash = document.querySelectorAll('.nav-options .todash');
-var togame = document.querySelectorAll('.nav-options .togame');
-var tochat = document.querySelectorAll('.nav-options .tochat');
-var dash = document.querySelectorAll('.center-console .dash');
-var chat = document.querySelectorAll('.center-console .chat');
-var game = document.querySelectorAll('.center-console .game');
 
-todash.forEach(function(button) {
-  button.addEventListener('click', function() {
-    var centerConsoleObjects = document.querySelectorAll('.center-console *');
-    centerConsoleObjects.forEach(function(element) {
-      element.style.display = 'none';
-    });
-    dash.forEach(function(element) {
-      element.style.display = 'block';
-    });
-  });
-});
 
-togame.forEach(function(button) {
-  button.addEventListener('click', function() {
-    var centerConsoleObjects = document.querySelectorAll('.center-console *');
-    centerConsoleObjects.forEach(function(element) {
-      element.style.display = 'none';
-    });
-    game.forEach(function(element) {
-      element.style.display = 'block';
-    });
-  });
-});
-
-tochat.forEach(function(button) {
-  button.addEventListener('click', function() {
-    var centerConsoleObjects = document.querySelectorAll('.center-console *');
-    centerConsoleObjects.forEach(function(element) {
-      element.style.display = 'none';
-    });
-    chat.forEach(function(element) {
-      element.style.display = 'block';
-    });
-  });
-});

@@ -6,6 +6,7 @@
 
 body {
     height: 100vh;
+    width: 100vw;
     background: linear-gradient(150deg, #003631 1%, #01443d 14%, #003E38 28%, #00766A 41%, #004E46 55%, #035149 62%, #035149 75%, #003E38 80%, #002924 99%);
     background-position: 80% 40%;
     background-size: 150% 100%;
@@ -15,8 +16,12 @@ body {
 }
 
 .container {
-    width: 95%;
-    height: 95%;
+    /* changess rachid  */
+    /* width: 95%;
+    height: 95%; */
+    width: 100vw;
+    height: 100vh;
+    /*  */
     position: relative;
     display: flex;
     justify-content: center;
@@ -346,13 +351,11 @@ body {
 }
 
 .chat {
-    display: none;
     width: 100%;
     height: 100%;
 }
 
 .game{
-    display: none;
     width: 100%;
     height: 100%;
 }
