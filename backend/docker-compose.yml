@@ -1,0 +1,51 @@
+version: '3'
+services:
+  django:
+    build: ./django
+    image: django
+    volumes:
+      - django_vol:/usr/src/app
+    container_name: django
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    networks:
+      - net
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: user 
+      POSTGRES_DB: db_name
+    networks:
+      - net
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8008:8080
+    networks:
+      - net
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - net
+volumes:
+  django_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/rennatiq/Desktop/docker_trans/django/volume
+      o: bind
+
+networks:
+  net:
