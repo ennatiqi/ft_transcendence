@@ -1,17 +1,19 @@
 var messages = document.querySelector('.messages-content');
 var d, h, m, i = 0;
 
+var username = "rachid";
 
-function insertTime() {
-    d = new Date();
-    m = d.getMinutes();
-    var timestamp = document.createElement('div');
-    timestamp.className = 'timestamp';
-    timestamp.textContent = d.getHours() + ':' + m;
-    var lastMessage = document.querySelector('.message:last-child');
-    lastMessage.appendChild(timestamp);
 
-}
+var usersDisplay = document.querySelector('.users-display');
+var searchDiv = document.getElementById('search');
+
+usersDisplay.addEventListener('scroll', function() {
+    if (usersDisplay.scrollTop === 0) {
+        searchDiv.style.display = 'flex';
+    } else {
+        searchDiv.style.display = 'none';
+    }
+});
 
 var j = 0;
 
@@ -19,6 +21,10 @@ function insertMessage() {
     var container = document.querySelector('.message-input');
     var newMessage = document.createElement('div');
     newMessage.innerHTML = container.value;
+
+    //container insert it to databases here
+
+
     if (j % 2 == 0)
         newMessage.classList.add('message', 'your-messages', 'new');
     else
@@ -27,7 +33,6 @@ function insertMessage() {
     if (messages && newMessage && container.value) {
         messages.appendChild(newMessage);
     }
-    insertTime();
 
     var chatBox = document.querySelector('.messages-content');
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -40,27 +45,63 @@ document.querySelector('.message-submit').addEventListener('click', function() {
 });
 
 document.querySelector('.message-submit').addEventListener('keydown', function(e) {
-    if (e.key === 13) { // If the key pressed was 'Enter' (Return key)
+    if (e.key === 13) {
         insertMessage();
         document.querySelector('.message-input').value = '';
     }
 });
 
+function responcivefun(){
+    var textChat = document.querySelector('.text-chat');
+    var Chat = document.querySelector('.chat');
+    if (window.matchMedia("(max-width: 375px)").matches) {
+        textChat.style.display = 'flex';
+        Chat.style.display = 'none';
+        var userDiv = document.createElement("div");
+        userDiv.className = "return";
+        userDiv.addEventListener('click', function() {
+            userDiv.removeChild(userDiv.firstChild);
+            textChat.style.display = 'none';
+            Chat.style.display = 'flex';
+        });
+
+        var img = document.createElement("img");
+        img.src = "./images/backtochat2.svg";
+        img.alt = "";
+        userDiv.appendChild(img);
+
+        var retur = document.querySelector(".text-chat");
+        retur.prepend(userDiv);
+    }
+}
 
 function createUserComponent(user) {
     var userDiv = document.createElement("div");
     userDiv.className = "user";
 
     userDiv.addEventListener('click', function() {
+        responcivefun();
+        
+
+        if (this.classList.contains('activeuser')) {
+            return;
+        }
+        var messagesContent = document.querySelector('.messages-content');
+
+        // Remove all child elements
+        while (messagesContent.firstChild) {
+            messagesContent.removeChild(messagesContent.firstChild);
+        }
+
+        // Add new elements here
+
         var users = document.querySelectorAll('.user');
         users.forEach(function(user) {
             user.classList.remove('activeuser');
         });
-    
+
         this.classList.add('activeuser');
-        // var textChat = document.getElementsByClassName('messages-content')[0];
-        // textChat.textContent = 'asdfadsfdf'; // Replace with the content you want
-    
+
         changeContent();
     });
 
@@ -118,27 +159,50 @@ async function getUsers() {
     });
 }
 
-
-
-
-// var users = [
-    //     {username: "rachid", newMessages: 4},
-    //     {username: "user", newMessages: 2},
-    //     // Add more users here
-    // ];
-
-getMessages();
-
-async function getMessages() {
+async function changeContent()
+{
     fetch('./script/chatdata.json')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        var messagesContent = document.querySelector('.messages-content');
+        data.forEach(message => {
+            var newMessage = document.createElement('div');
+            newMessage.textContent = message.content;
+
+            if (message.sender === username) {
+                newMessage.classList.add('message', 'my-messages', 'new');
+            } else {
+                newMessage.classList.add('message', 'your-messages', 'new');
+            }
+
+            messagesContent.appendChild(newMessage);
+
+            insertTime(message.time)
+            
+        });
+        messagesContent.scrollTop = messagesContent.scrollHeight;
+        
     });
 }
 
-async function changeContent()
-{
-    var textChat = document.getElementsByClassName('messages-content')[0];
-    textChat.textContent = 'holla'; // Replace with the content you want
+
+function insertTime(time) {
+
+    var timestamp = document.createElement('div');
+    timestamp.className = 'timestamp';
+
+    var messageTime = new Date(time);
+    var currentTime = new Date();
+
+    var differenceInMinutes = (currentTime - messageTime) / (1000 * 60);
+
+    if (differenceInMinutes < 1) {
+        timestamp.textContent = "Just now";
+    } else {
+        timestamp.textContent = messageTime.toLocaleTimeString();
+    }
+
+    var lastMessage = document.querySelector('.message:last-child');
+    lastMessage.appendChild(timestamp);
+
 }
