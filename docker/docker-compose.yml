@@ -1,0 +1,86 @@
+version: '3'
+services:
+
+  pong:
+    build: ./pong
+    image: pong
+    container_name: pong
+    restart: always
+    depends_on:
+      - database
+    volumes:
+      - PongVol:/usr/src/app
+    ports:
+      - 8000:8000
+    networks:
+      - net
+
+  database:
+    image: postgres:13
+    container_name: database
+    restart: always
+    volumes:
+      - DatabaseVol:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: user 
+      POSTGRES_DB: db_user
+    networks:
+      - net
+
+  frontend:
+    image: node:14
+    container_name: frontend
+    restart: always
+    volumes:
+      - FrontVol:/usr/src/app
+    working_dir:
+      /usr/src/app
+    command: bash -c "node server.js"
+    ports:
+      - 8080:8080
+    networks:
+      - net
+
+  # rachid part
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8008:8080
+    networks:
+      - net
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - net
+
+
+volumes:
+  PongVol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/rennatiq/Desktop/docker_trans/pong/volumes/PongVol
+      o: bind
+  DatabaseVol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/rennatiq/Desktop/docker_trans/pong/volumes/DatabaseVol
+      o: bind
+  FrontVol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/rennatiq/Desktop/docker_trans/frontend/FrontVol
+      o: bind
+  
+
+networks:
+  net:

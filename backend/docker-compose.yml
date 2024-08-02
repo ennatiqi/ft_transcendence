@@ -18,9 +18,9 @@ services:
     container_name: db
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: user
       POSTGRES_USER: user 
-      POSTGRES_DB: db_name
+      POSTGRES_DB: user
     networks:
       - net
   adminer:
@@ -44,7 +44,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/docker_trans/django/volume
+      device: /Users/rennatiq/Desktop/ft_transcendence/backend/django/volume
       o: bind
 
 networks:

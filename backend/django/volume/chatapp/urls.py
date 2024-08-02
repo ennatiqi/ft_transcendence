@@ -4,6 +4,6 @@ from .views import index, room
 
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("<str:room_name>/", room, name="room"),
+    path('', index, name='index'),
+    path('chat/<str:room_name>/', room, name='room'),
 ]

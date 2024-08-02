@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ['0.0.0.0']
 INSTALLED_APPS = [
     'daphne',
     'channels',
-    'rest_framework',
+    # 'rest_framework',
     'chatapp',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,13 +73,11 @@ CHANNEL_LAYERS = {
         },
     },
 }
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
 
 DATABASES = {
     'default': {

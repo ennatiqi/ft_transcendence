@@ -28,11 +28,6 @@ export const Routes = [
         path: '/contact',
         component: Contact
     },
-    // {
-    //     path : '/dashboard',
-    //     children: [
-    //     ],
-    // },
     {
         path: '/dashboard',
         component: Dash
@@ -72,13 +67,9 @@ class Router {
         {
             content_.innerHTML = '<dashboard-page></dashboard-page>';
             content_ = document.getElementById("dashscripte");
-            // content_.innerHTML = '';
-            // const help = new Dashboard;
 
-            // content_.appendChild(help);
 
         }
-        // else
         if (content_) {
             content_.appendChild(curr_page);
         }
@@ -93,7 +84,6 @@ class Router {
     }
 }
 export const router = new Router();
-// router.navigate(window.location.pathname);
 
 
 document.addEventListener("DOMContentLoaded", () => {

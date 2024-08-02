@@ -1,25 +1,28 @@
+# from django.db import models
+# from django.contrib.auth import get_user_model
+
+# User = get_user_model()
+
+
+# class Message(models.Model):
+#     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender_messages')
+#     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+#     time = models.DateTimeField(auto_now_add=True)
+#     is_read = models.BooleanField(default=False)
+#     content = models.TextField()
+    
+
+#     def __str__(self):
+#         return  self.sender.username
+
 from django.db import models
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-# Create your models here.
-# class User(models.Model):
-#     username = models.CharField(max_length=100)
+from django.contrib.auth.models import User
 
 class Message(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_messages')
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
     content = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
-    # sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    # receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
-    # is_read = models.BooleanField(default=False)
-    
-    # class Meta:
-    #     ordering = ['time']
-    #     verbose_name_plural = "Messages"
 
     def __str__(self):
-        return  self.author.username 
-    def last_22_messages(self ):
-        return Message.objects.order_by('-time').all()[:22 ]
+        return f"{self.sender} -> {self.receiver}: {self.content[:20]}..."

@@ -3,18 +3,14 @@
 export default class E404 extends HTMLElement {
     constructor() {super()}
     connectedCallback() {
-        this.innerHTML = `
-        <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
-            </head>
-            <body>
-                <h1>404</h1>
-            </body>
-            </html>
-        `;
+        fetch('views/404.html')
+            .then(response => response.text())
+            .then(data => {
+                this.innerHTML = data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 }
 
