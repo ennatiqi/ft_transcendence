@@ -1,14 +1,14 @@
-* {
-    font-family: 'Poppins', sans-serif;
-}
 
-body {
+
+chat-page {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} 
 
-.container {
+
+
+#chatid .container {
     width: 90%;
     height: 98vh;
     display: flex;
@@ -16,7 +16,7 @@ body {
     align-items: center;
 }
 
-.chat {
+#chatid .chat {
     width: 35%;
     height: 100vh;
     background-color: #00453F64;
@@ -25,14 +25,14 @@ body {
     border-radius: 40px;
 }
 
-.chat .chattext {
+#chatid .chat .chattext {
     color: #3DBDA7;
     margin-left: 40px;
     font-size: 36px;
     margin-bottom: 30px;
 }
 
-.user {
+#chatid .user {
     position: relative;
     width: 15%;
     margin-top: 30px;
@@ -42,12 +42,12 @@ body {
     scroll-snap-align: start;
 }
 
-.users-display::-webkit-scrollbar {
+#chatid .users-display::-webkit-scrollbar {
     display: none;
 }
 
 
-.users-display {
+#chatid .users-display {
     width: 100%;
     height: 80%;
     margin-left: 40px;
@@ -56,7 +56,7 @@ body {
     scroll-snap-type: y mandatory;
 }
 
-.user img {
+#chatid .user img {
     width: 100%;
     height: 90%;
     margin-right: 20px;
@@ -65,7 +65,7 @@ body {
     /* position: relative; */
 }
 
-.user-status {
+#chatid .user-status {
     position: absolute;
     top: 0;
     right: 0;
@@ -76,7 +76,7 @@ body {
     background-color: #A5BAA9;
 }
 
-.backgrounda {
+#chatid .backgrounda {
     top: 8%;
     left: 10%;
     width: 70%;
@@ -86,11 +86,11 @@ body {
     background-color: #A5BAA9;
 }
 
-.user-status.active {
+#chatid .user-status.active {
     background-color: #36f00c;
 }
 
-.user-ingame.active {
+#chatid .user-ingame.active {
     width: 94%;
     height: 34%;
     background-color: #3DBDA7;
@@ -104,29 +104,29 @@ body {
     bottom: -16%;
 }
 
-.user-ingame {
+#chatid .user-ingame {
     display: none;
 }
 
-.flex-col {
+#chatid .flex-col {
     display: flex;
     flex-direction: column;
 }
 
-.user .username h1 {
+#chatid .user .username h1 {
     font-size: 20px;
     color: #FFFFFF;
     margin: 0;
 }
 
-.user .username p {
+#chatid .user .username p {
     font-size: 14px;
     color: #B5B2B2;
     width: 100vw;
     margin-top: 5px;
 }
 
-.text-chat {
+#chatid .text-chat {
     width: 60%;
     height: 100vh;
     display: flex;
@@ -141,7 +141,7 @@ body {
 
 
 
-.messages {
+#chatid .messages {
     flex: 1 1 auto;
     color: rgba(255, 255, 255, .5);
     overflow: hidden;
@@ -152,20 +152,20 @@ body {
     margin-bottom: 20px;
 }
 
-.messages-content {
+#chatid .messages-content {
     overflow-y:scroll;
 }
 
-.messages-content::-webkit-scrollbar {
+#chatid .messages-content::-webkit-scrollbar {
     display: none;
 }
 
-.messages .messages-content {
+#chatid .messages .messages-content {
     height: 100%;
     width: 100%;
 }
 
-.messages .message {
+#chatid .messages .message {
     clear: both;
     float: left;
     margin: 18px 5px;
@@ -176,7 +176,7 @@ body {
     position: relative;
 }
 
-.messages .my-messages .timestamp {
+#chatid .messages .my-messages .timestamp {
     position: absolute;
     bottom: -15px;
     font-size: 12px;
@@ -184,7 +184,7 @@ body {
     color: rgba(255, 255, 255, .3);
 }
 
-.messages .my-messages {
+#chatid .messages .my-messages {
     max-width: 70%;
     float: right;
     color: #fff;
@@ -194,7 +194,7 @@ body {
     font-size: 1rem;
 }
 
-.messages .my-messages::before {
+#chatid .messages .my-messages::before {
     left: auto;
     right: 0;
     border-right: none;
@@ -203,7 +203,7 @@ body {
     bottom: -4px;
 }
 
-.messages .your-messages {
+#chatid .messages .your-messages {
     max-width: 70%;
     float: left;
     background-color: #fff;
@@ -213,7 +213,7 @@ body {
     font-size: 1rem;
 }
 
-.messages .your-messages::before {
+#chatid .messages .your-messages::before {
     left: auto;
     right: 0;
     border-right: none;
@@ -222,24 +222,24 @@ body {
     bottom: -4px;
 }
 
-.messages .your-messages .timestamp {
+#chatid .messages .your-messages .timestamp {
     position: absolute;
     bottom: -15px;
     font-size: 12px;
     color: rgba(255, 255, 255, .3);
 }
 
-.messages .message:last-child {
+#chatid .messages .message:last-child {
     margin-bottom: 30px;
 }
 
-.messages .message .new {
+#chatid .messages .message .new {
     transform: scale(0);
     transform-origin: 0 0;
     animation: bounce 500ms linear both;
 }
 
-.message-box {
+#chatid .message-box {
     flex: 0 1 40px;
     width: 100%;
     padding: 10px;
@@ -248,7 +248,7 @@ body {
     align-items: center;
 }
 
-.message-box .message-input {
+#chatid .message-box .message-input {
     border: none;
     width: 80%;
     resize: none;
@@ -258,11 +258,11 @@ body {
     padding: 20px;
 }
 
-.message-box .message-input::-webkit-scrollbar {
+#chatid .message-box .message-input::-webkit-scrollbar {
     display: none;
 }
 
-.message-box .message-submit {
+#chatid .message-box .message-submit {
     color: #fff;
     border: none;
     background: #3DBDA7;
@@ -271,6 +271,6 @@ body {
     border-radius: 25px;
 }
 
-.message-box .message-submit:hover {
+#chatid .message-box .message-submit:hover {
     background: #209380;
 }

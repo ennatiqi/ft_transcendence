@@ -142,10 +142,12 @@ var users = [];
 
 getUsers();
 
+var myuser;
+
 async function getUsers() {
 		
 		// Send the form data using fetch
-		fetch('http://localhost:8000/chat/')
+		fetch('http://localhost:8000/users/')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -153,6 +155,14 @@ async function getUsers() {
             return response.json();
         })
         .then(data => {
+            data.forEach(user => {
+                users.push(user);
+            });
+            users.forEach(function(user) {
+                var userComponent = createUserComponent(user);
+                usersDisplay.appendChild(userComponent);
+            });
+            myuser = data.name;
             console.log(data);
         })
         .catch(error => {
@@ -163,25 +173,12 @@ async function getUsers() {
 
 
 
-    fetch('../script/user.json')
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(user => {
-            users.push(user);
-        });
-        users.forEach(function(user) {
-            var userComponent = createUserComponent(user);
-            usersDisplay.appendChild(userComponent);
-        });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 }
 
 async function changeContent()
 {
-    fetch('../script/chatdata.json')
+
+    fetch(`http://localhost:8000/chat/?myId=${1}&clickedId=${1}`)
     .then(response => response.json())
     .then(data => {
         var messagesContent = document.querySelector('.messages-content');

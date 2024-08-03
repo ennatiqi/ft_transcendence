@@ -7,7 +7,7 @@ export default class Dashboard extends HTMLElement {
                 <head>
                     <link rel="stylesheet" href="../style/dashboard.css">
                 </head>
-        <div class="container" >
+        <div class="container" id="dashboardid">
             <div class="side-panel">
                  <img src="../images/Logo.svg" class="logo">
                 <div class="nav-options" >
