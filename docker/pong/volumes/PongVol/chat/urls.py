@@ -1,8 +1,6 @@
 from django.urls import path
-
-from .views import index
-
+from .views import MessageViewSet
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('chat/', MessageViewSet.as_view({'get': 'list'}), name='caht-app'),
 ]

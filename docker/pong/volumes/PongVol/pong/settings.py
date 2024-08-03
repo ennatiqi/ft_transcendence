@@ -59,6 +59,25 @@ MIDDLEWARE = [
     'users.middleware.JWTAuthenticationMiddleware'
 ]
 
+# rachid
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",  # URL of your React app
+]
+CORS_ALLOWED_HEADERS = [
+    'content-type',
+    'authorization',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+
 ROOT_URLCONF = 'pong.urls'
 
 TEMPLATES = [
