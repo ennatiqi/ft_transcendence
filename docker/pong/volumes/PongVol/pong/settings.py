@@ -31,10 +31,10 @@ ALLOWED_HOSTS = ['0.0.0.0']
 # Application definition
 
 INSTALLED_APPS = [
-    # rachid
     'daphne',
     'channels',
     'chat',
+    # rachid
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,9 +77,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pong.wsgi.application'
 # rachid
-ASGI_APPLICATION = 'chat.asgi.application'
+WSGI_APPLICATION = 'pong.wsgi.application'
+ASGI_APPLICATION = 'pong.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
