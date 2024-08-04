@@ -3,7 +3,6 @@ export default class Dashboard extends HTMLElement {
     constructor() {super()}
     connectedCallback() {
         this.innerHTML = `
-        <html>
                 <head>
                     <link rel="stylesheet" href="../style/dashboard.css">
                 </head>
@@ -11,15 +10,14 @@ export default class Dashboard extends HTMLElement {
             <div class="side-panel">
                  <img src="../images/Logo.svg" class="logo">
                 <div class="nav-options" >
-              
-                    <a href="/dashboard" class="btn-option flex-center btn-highlight todash nav__link"  data-link>
+                    <a href="/dashboard" class="btn-option flex-center btn-highlight  nav__link"  data-link>
                         <img src="../images/Home.svg">
                     </a>
                 
-                    <a href="/dashboard/game" class="btn-option flex-center btn-simple togame nav__link"  data-link>
+                    <a href="/dashboard/game" class="btn-option flex-center btn-simple  nav__link"  data-link>
                         <img  src="../images/Users.svg">
                     </a>
-                    <a href="/dashboard/chat" class="btn-option flex-center btn-simple tochat nav__link" data-link>
+                    <a href="/dashboard/chat" class="btn-option flex-center btn-simple  nav__link" data-link>
                         <img src="../images/Sms.svg">
                     </a>
                 </div> 
@@ -39,12 +37,10 @@ export default class Dashboard extends HTMLElement {
                         <div class="notifications-widget"></div>
                     </div>
                 </div>
-                <div class="center-console">
+                <div class="center-console" id="dashscripte">
                 
                 
-                    <div id="dashscripte"></div>
-
-
+                    
 
                 </div>
             </div>
@@ -127,8 +123,6 @@ export default class Dashboard extends HTMLElement {
             </div>
         </div>
         <script src="../script/dashboard.js"></script>
-        </html>
-
         `;
     }
 }

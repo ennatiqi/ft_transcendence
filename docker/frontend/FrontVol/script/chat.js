@@ -1,7 +1,51 @@
 var messages = document.querySelector('.messages-content');
 var d, h, m, i = 0;
+var myuser;
+var userdata;
+let mydata;
+fetch('http://localhost:8000/main/data/',{
+    method:"get",
+    credentials:"include"
+})
+.then(response => response.json())
+.then(data => {
+    mydata = data;
+})
 
-var username = "rachid";
+var usersDisplay = document.querySelector(".users-display");
+
+var users = [];
+
+
+		
+fetch('http://localhost:8000/chat/users/')
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => {
+    data.forEach(user => {
+        if (user.id != mydata.id)
+            users.push(user);
+    });
+    users.forEach(function(user) {
+        var userComponent = createUserComponent(user);
+        userComponent.addEventListener('click', function() {
+            userdata = user.id;
+        });
+        usersDisplay.appendChild(userComponent);
+    });
+
+})
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.log('There was a problem with the fetch operation: ' + error.message);
+});
+
 
 
 var usersDisplay = document.querySelector('.users-display');
@@ -15,21 +59,39 @@ usersDisplay.addEventListener('scroll', function() {
     }
 });
 
-var j = 0;
 
 function insertMessage() {
     var container = document.querySelector('.message-input');
+    console.log(container.value);
     var newMessage = document.createElement('div');
     newMessage.innerHTML = container.value;
 
-    //container insert it to databases here
 
+    let url = 'http://localhost:8000/chat/chat/';
 
-    if (j % 2 == 0)
-        newMessage.classList.add('message', 'your-messages', 'new');
-    else
-        newMessage.classList.add('message', 'my-messages', 'new');
-    j++;
+    let data = {
+        sender: mydata.id,
+        receiver: userdata,
+        content: container.value,
+        time: new Date().toISOString()
+    };
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    newMessage.classList.add('message', 'my-messages', 'new');
     if (messages && newMessage && container.value) {
         messages.appendChild(newMessage);
     }
@@ -45,11 +107,12 @@ document.querySelector('.message-submit').addEventListener('click', function() {
 });
 
 document.querySelector('.message-submit').addEventListener('keydown', function(e) {
-    if (e.key === 13) {
+    if (e.key === 'Enter') {
         insertMessage();
         document.querySelector('.message-input').value = '';
     }
 });
+
 
 function responcivefun(){
     var textChat = document.querySelector('.text-chat');
@@ -136,57 +199,22 @@ function createUserComponent(user) {
 }
 
 
-var usersDisplay = document.querySelector(".users-display");
-
-var users = [];
-
-getUsers();
-
-var myuser;
-
-async function getUsers() {
-		
-		// Send the form data using fetch
-		fetch('http://localhost:8000/users/')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            data.forEach(user => {
-                users.push(user);
-            });
-            users.forEach(function(user) {
-                var userComponent = createUserComponent(user);
-                usersDisplay.appendChild(userComponent);
-            });
-            myuser = data.name;
-            console.log(data);
-        })
-        .catch(error => {
-            console.log('There was a problem with the fetch operation: ' + error.message);
-        });
 
 
-
-
-
-}
 
 async function changeContent()
 {
+    
 
-    fetch(`http://localhost:8000/chat/?myId=${1}&clickedId=${1}`)
+    fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${userdata}`)
     .then(response => response.json())
     .then(data => {
         var messagesContent = document.querySelector('.messages-content');
         data.forEach(message => {
             var newMessage = document.createElement('div');
             newMessage.textContent = message.content;
-
-            if (message.sender === username) {
+                        
+            if (message.sender === mydata.id) {
                 newMessage.classList.add('message', 'my-messages', 'new');
             } else {
                 newMessage.classList.add('message', 'your-messages', 'new');

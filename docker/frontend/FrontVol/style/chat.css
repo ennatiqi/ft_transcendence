@@ -1,22 +1,19 @@
 
+chat-page{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-chat-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} 
-
-
-
-#chatid .container {
+chat-page .parent {
     width: 90%;
-    height: 98vh;
+    height: 98%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#chatid .chat {
+chat-page .chat {
     width: 35%;
     height: 100vh;
     background-color: #00453F64;
@@ -25,47 +22,53 @@ chat-page {
     border-radius: 40px;
 }
 
-#chatid .chat .chattext {
+chat-page .chat .chattext {
     color: #3DBDA7;
     margin-left: 40px;
     font-size: 36px;
     margin-bottom: 30px;
 }
 
-#chatid .user {
+chat-page .user {
     position: relative;
-    width: 15%;
+    width: 90%;
+    height: 40%;
     margin-top: 30px;
     border-radius: 50%;
+    padding: 10px;
     display: flex;
     margin-bottom: 20px;
-    scroll-snap-align: start;
 }
 
-#chatid .users-display::-webkit-scrollbar {
-    display: none;
+chat-page .user.activeuser{
+    background-color: #1a7264;
+    width: 83%;
+    border-radius: 24px;
+    padding-bottom: 20px;
 }
 
 
-#chatid .users-display {
+
+chat-page .users-display {
     width: 100%;
     height: 80%;
     margin-left: 40px;
     overflow: scroll;
     border-radius: 0 0 3vw 3vw;
     scroll-snap-type: y mandatory;
+    scrollbar-width: none;
 }
 
-#chatid .user img {
-    width: 100%;
+
+chat-page .user img {
+    width: 10%;
     height: 90%;
     margin-right: 20px;
     background-color: #F7C5BF;
     border-radius: 50%;
-    /* position: relative; */
 }
 
-#chatid .user-status {
+chat-page .user-status {
     position: absolute;
     top: 0;
     right: 0;
@@ -76,7 +79,7 @@ chat-page {
     background-color: #A5BAA9;
 }
 
-#chatid .backgrounda {
+chat-page .backgrounda {
     top: 8%;
     left: 10%;
     width: 70%;
@@ -86,12 +89,15 @@ chat-page {
     background-color: #A5BAA9;
 }
 
-#chatid .user-status.active {
+chat-page .user-status.active {
     background-color: #36f00c;
 }
+chat-page .user-ingame {
+    display: none;
+}
 
-#chatid .user-ingame.active {
-    width: 94%;
+chat-page .user-ingame.active {
+    width: 10%;
     height: 34%;
     background-color: #3DBDA7;
     position: absolute;
@@ -101,36 +107,40 @@ chat-page {
     align-items: center;
     color: white;
     font-size: 0.6vw;
-    bottom: -16%;
+    bottom: 2%;
 }
 
-#chatid .user-ingame {
-    display: none;
-}
 
-#chatid .flex-col {
+chat-page .flex-col {
     display: flex;
     flex-direction: column;
 }
 
-#chatid .user .username h1 {
+chat-page .user .username {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    
+}
+
+chat-page .user .username h1 {
     font-size: 20px;
     color: #FFFFFF;
     margin: 0;
+    display: inline-block;
 }
 
-#chatid .user .username p {
+chat-page .user .username p {
     font-size: 14px;
     color: #B5B2B2;
-    width: 100vw;
     margin-top: 5px;
+    display: inline-block;
 }
 
-#chatid .text-chat {
+chat-page .text-chat {
     width: 60%;
     height: 100vh;
     display: flex;
-    /* background-color: #00453F64; */
     background: radial-gradient(circle at top left, #053732, #006C6199, #0E867985, #3DBDA700);
     justify-content: center;
     border-radius: 24px;
@@ -141,7 +151,7 @@ chat-page {
 
 
 
-#chatid .messages {
+chat-page .messages {
     flex: 1 1 auto;
     color: rgba(255, 255, 255, .5);
     overflow: hidden;
@@ -152,20 +162,19 @@ chat-page {
     margin-bottom: 20px;
 }
 
-#chatid .messages-content {
+chat-page .messages-content {
     overflow-y:scroll;
+    scrollbar-width: none;
 }
 
-#chatid .messages-content::-webkit-scrollbar {
-    display: none;
-}
 
-#chatid .messages .messages-content {
+
+chat-page .messages .messages-content {
     height: 100%;
     width: 100%;
 }
 
-#chatid .messages .message {
+chat-page .messages .message {
     clear: both;
     float: left;
     margin: 18px 5px;
@@ -176,7 +185,7 @@ chat-page {
     position: relative;
 }
 
-#chatid .messages .my-messages .timestamp {
+chat-page .messages .my-messages .timestamp {
     position: absolute;
     bottom: -15px;
     font-size: 12px;
@@ -184,7 +193,7 @@ chat-page {
     color: rgba(255, 255, 255, .3);
 }
 
-#chatid .messages .my-messages {
+chat-page .messages .my-messages {
     max-width: 70%;
     float: right;
     color: #fff;
@@ -194,7 +203,7 @@ chat-page {
     font-size: 1rem;
 }
 
-#chatid .messages .my-messages::before {
+chat-page .messages .my-messages::before {
     left: auto;
     right: 0;
     border-right: none;
@@ -203,7 +212,7 @@ chat-page {
     bottom: -4px;
 }
 
-#chatid .messages .your-messages {
+chat-page .messages .your-messages {
     max-width: 70%;
     float: left;
     background-color: #fff;
@@ -213,7 +222,7 @@ chat-page {
     font-size: 1rem;
 }
 
-#chatid .messages .your-messages::before {
+chat-page .messages .your-messages::before {
     left: auto;
     right: 0;
     border-right: none;
@@ -222,24 +231,24 @@ chat-page {
     bottom: -4px;
 }
 
-#chatid .messages .your-messages .timestamp {
+chat-page .messages .your-messages .timestamp {
     position: absolute;
     bottom: -15px;
     font-size: 12px;
     color: rgba(255, 255, 255, .3);
 }
 
-#chatid .messages .message:last-child {
+chat-page .messages .message:last-child {
     margin-bottom: 30px;
 }
 
-#chatid .messages .message .new {
+chat-page .messages .message .new {
     transform: scale(0);
     transform-origin: 0 0;
     animation: bounce 500ms linear both;
 }
 
-#chatid .message-box {
+chat-page .message-box {
     flex: 0 1 40px;
     width: 100%;
     padding: 10px;
@@ -248,7 +257,7 @@ chat-page {
     align-items: center;
 }
 
-#chatid .message-box .message-input {
+chat-page .message-box .message-input {
     border: none;
     width: 80%;
     resize: none;
@@ -256,13 +265,15 @@ chat-page {
     font-size: 16px;
     border-radius: 26px;
     padding: 20px;
+    
 }
 
-#chatid .message-box .message-input::-webkit-scrollbar {
+chat-page .message-box .message-input::-webkit-scrollbar {
     display: none;
+
 }
 
-#chatid .message-box .message-submit {
+chat-page .message-box .message-submit {
     color: #fff;
     border: none;
     background: #3DBDA7;
@@ -271,6 +282,193 @@ chat-page {
     border-radius: 25px;
 }
 
-#chatid .message-box .message-submit:hover {
+chat-page .message-box .message-submit:hover {
     background: #209380;
 }
+
+chat-page .search{
+    padding: 20px;
+    width: 80%;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: #105852;
+    border: none;
+    color: white;
+    border-radius: 24px;
+}
+
+@media (max-width: 375px) {
+    chat-page .chat {
+        width: 100%;
+    }
+    
+    chat-page .chat .chattext {
+        margin-left: 30px;
+        font-size: 20px;
+    }
+    
+    chat-page .user {
+        position: relative;
+        width: 90%;
+        margin-top: 10px;
+        border-radius: 50%;
+        padding: 10px;
+    }
+    
+    chat-page .users-display {
+        width: 100%;
+        height: 80%;
+        margin-left: 20px;
+        border-radius: 0 0 3vw 3vw;
+        scroll-snap-type: y mandatory;
+        scrollbar-width: none;
+    }
+    
+    chat-page .user img {
+        width: 20%;
+    }
+    
+    chat-page .user-ingame.active {
+        width: 20%;
+        height: 34%;
+        background-color: #3DBDA7;
+        position: absolute;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2.5vw;
+        bottom: 2%;
+    }
+    
+    
+    chat-page .user .username h1 {
+        font-size: 15px;
+    }
+    
+    chat-page .user .username p {
+        font-size: 10px;
+    }
+    chat-page .text-chat {
+        width: 100%;
+        display: none;
+    }
+
+    chat-page .messages .message {
+        clear: both;
+        float: left;
+        margin: 10px 5px;
+        font-size: 6px;
+        line-height: 1;
+        margin-left: 10px;
+    }
+    
+    chat-page .messages .my-messages .timestamp {
+        font-size: 8px;
+    }
+    
+    chat-page .messages .my-messages {
+        max-width: 60%;
+        float: right;
+        padding: 10px;
+        border-radius: 22px;
+        font-size: 0.8rem;
+    }
+    
+    chat-page .messages .my-messages::before {
+        left: auto;
+        right: 0;
+        border-right: none;
+        border-left: 5px solid transparent;
+        border-top: 4px solid #257287;
+        bottom: -4px;
+    }
+    
+    chat-page .messages .your-messages {
+        max-width: 60%;
+        float: left;
+        padding: 10px;
+        border-radius: 22px;
+        font-size: 0.8rem;
+    }
+    
+    chat-page .messages .your-messages::before {
+        left: auto;
+        right: 0;
+        border-right: none;
+        border-left: 5px solid transparent;
+        border-top: 4px solid #257287;
+        bottom: -4px;
+    }
+    
+    chat-page .messages .your-messages .timestamp {
+        font-size: 8px;
+    }
+    
+    chat-page .messages .message:last-child {
+        margin-bottom: 20px;
+    }
+    
+    
+    chat-page .message-box {
+        flex: 0 1 20px;
+        width: 90%;
+        padding: 5px;
+        
+    }
+    
+    chat-page .message-box .message-input {
+        font-size: 14px;
+        border-radius: 22px;
+        padding: 15px;
+        
+    }
+    
+    chat-page .message-box .message-input::-webkit-scrollbar {
+        display: none;
+    }
+    chat-page .message-box .message-submit {
+        padding: 15px;
+        border-radius: 22px;
+    }
+
+    chat-page .return{
+        display: flex;
+        justify-content: start;
+        align-items: start;
+    }
+    chat-page .return img
+    {
+        width: 10%;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    chat-page .search{
+        padding: 20px;
+        width: 72%;
+        margin-left: 20px;
+        justify-content: center;
+        align-items: center;
+        background-color: #105852;
+        border: none;
+        color: white;
+        border-radius: 24px;
+    }
+
+}
+
+chat-page .triangle-1 {
+    width: 20%;
+    height: 80%;
+    position: absolute;
+    left: 30%;
+    top: 15%;
+    background: radial-gradient(circle at top left, #053732, #006C6199, #0E867985, #3DBDA700);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+
+

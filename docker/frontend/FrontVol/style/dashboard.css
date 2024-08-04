@@ -5,8 +5,7 @@
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+
     background: linear-gradient(150deg, #003631 1%, #01443d 14%, #003E38 28%, #00766A 41%, #004E46 55%, #035149 62%, #035149 75%, #003E38 80%, #002924 99%);
     background-position: 80% 40%;
     background-size: 150% 100%;
@@ -16,24 +15,21 @@ body {
 }
 
 dashboard-page{
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
-.container {
-    /* changess rachid  */
-    width: 95%;
-    height: 95%;
-    /* width: 100vw;
-    height: 100vh; */
-    /*  */
+dashboard-page .container {
+
+    width: 100%;
+    height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main {
+dashboard-page .main {
     flex: 13;
     height: 100%;
     display: flex;
@@ -42,7 +38,7 @@ dashboard-page{
     flex-direction: column;
 }
 
-.header-bar {
+dashboard-page .header-bar {
     flex: 1;
     width: 95%;
     /* border: 1px solid #000000; */
@@ -52,7 +48,7 @@ dashboard-page{
     /* position: relative; */
 }
 
-.header-name {
+dashboard-page .header-name {
     display: flex;
     justify-content: start;
     align-items: start;
@@ -61,15 +57,15 @@ dashboard-page{
     font-size: 1.3vw;
 }
 
-.header-name h2:nth-child(1) {
+dashboard-page .header-name h2:nth-child(1) {
     color: #FFFFFF;
 }
 
-.header-name h2:nth-child(2) {
+dashboard-page .header-name h2:nth-child(2) {
     color: #3DBDA7;
 }
 
-.header-notifications {
+dashboard-page .header-notifications {
     width: 8%;
     height: 70%;
     display: flex;
@@ -78,7 +74,7 @@ dashboard-page{
     /* background-color: white; */
 }
 
-.notifications-widget {
+dashboard-page .notifications-widget {
     flex: 1;
     aspect-ratio: 1/1;
     max-width: 48%;
@@ -87,7 +83,7 @@ dashboard-page{
     background-color: #00453F;
 }
 
-.header-search {
+dashboard-page .header-search {
     width: 30%;
     height: 70%;
     margin-left: 15%;
@@ -98,9 +94,9 @@ dashboard-page{
     border-radius: 4vw;
 }
 
-.side-panel {
+dashboard-page .side-panel {
     flex: 1;
-    /* width: 6%; */
+    
     height: 100%;
     background: #00453F;
     border-radius: 2vw;
@@ -110,13 +106,13 @@ dashboard-page{
     flex-direction: column;
 }
 
-.logo {
+dashboard-page .logo {
     aspect-ratio: 1/1;
     width: 60%;
     margin-top: 25%;
 }
 
-.nav-options {
+dashboard-page .nav-options {
     width: 55%;
     height: 40%;
     margin-top: 100%;
@@ -126,33 +122,33 @@ dashboard-page{
     flex-direction: column;
 }
 
-.nav-options img {
+dashboard-page .nav-options img {
     width: 50%;
 }
 
-.btn-option.btn-highlight img {
+dashboard-page .btn-option.btn-highlight img {
     width: 60%;
 }
 
-.btn-highlight {
+dashboard-page .btn-highlight {
     aspect-ratio: 1/1;
     background-color: #3DBDA7;
     border-radius: 50%;
     box-shadow: 0 0 30px #3DBDA7;
 }
 
-.btn-simple {
+dashboard-page .btn-simple {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.btn-option {
+dashboard-page .btn-option {
     aspect-ratio: 1/1;
     width: 80%;
     margin-bottom: 50px;
     border: 0;
 }
 
-.logout {
+dashboard-page .logout {
     aspect-ratio: 1/1;
     width: 50%;
     bottom: 2%;
@@ -161,11 +157,11 @@ dashboard-page{
     position: absolute;
 }
 
-.logout img {
+dashboard-page .logout img {
     width: 100%;
 }
 
-.right-side-panel {
+dashboard-page .right-side-panel {
     flex: 1;
     height: 100%;
     position: relative;
@@ -177,7 +173,7 @@ dashboard-page{
 
 /* ************* UPPER SECTION OF RIGHT PANEL */
 
-.upper-section {
+dashboard-page .upper-section {
     width: 100%;
     height: 70%;
     background: #00453F;
@@ -188,21 +184,21 @@ dashboard-page{
     flex-direction: column;
 }
 
-.profile-photo {
+dashboard-page .profile-photo {
     width: 80%;
     padding-top: 10%;
 }
 
-.profile-photo img {
+dashboard-page .profile-photo img {
     width: 100%;
 }
 
-.upper-section-icone {
+dashboard-page .upper-section-icone {
     width: 30%;
     margin-top: 10%;
 }
 
-.user {
+dashboard-page .user {
     aspect-ratio: 1/1;
     position: relative;
     width: 55%;
@@ -215,30 +211,30 @@ dashboard-page{
     scroll-snap-align: start;
 }
 
-.overflow-style::-webkit-scrollbar {
+dashboard-page .overflow-style::-webkit-scrollbar {
     display: none;
 }
 
-.flex-col {
+dashboard-page .flex-col {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.flex-row {
+dashboard-page .flex-row {
     display: flex;
     align-items: center;
     flex-direction: row;
 }
 
-.flex-center {
+dashboard-page .flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.users-display {
+dashboard-page .users-display {
     margin-top: 13%;
     width: 100%;
     height: 80%;
@@ -247,12 +243,12 @@ dashboard-page{
     scroll-snap-type: y mandatory;
 }
 
-.user img {
+dashboard-page .user img {
     width: 100%;
     position: relative;
 }
 
-.user-status {
+dashboard-page .user-status {
     position: absolute;
     top: 0;
     right: 0;
@@ -263,11 +259,11 @@ dashboard-page{
     background-color: #A5BAA9;
 }
 
-.user-status.active {
+dashboard-page .user-status.active {
     background-color: #36f00c;
 }
 
-.user-ingame.active {
+dashboard-page .user-ingame.active {
     width: 94%;
     height: 34%;
     background-color: #3DBDA7;
@@ -283,14 +279,13 @@ dashboard-page{
     bottom: -16%;
 }
 
-.user-ingame {
+dashboard-page .user-ingame {
     display: none;
 }
 
 
-/* ************* LOWER SECTION OF RIGHT PANEL*/
 
-.lower-section {
+dashboard-page .lower-section {
     width: 100%;
     height: 27%;
     bottom: 0;
@@ -302,7 +297,7 @@ dashboard-page{
     flex-direction: column;
 }
 
-.lower-section-header {
+dashboard-page .lower-section-header {
     height: 20%;
     width: 100%;
     display: flex;
@@ -310,20 +305,20 @@ dashboard-page{
     justify-content: center;
 }
 
-.lower {
+dashboard-page .lower {
     width: 100%;
 }
 
-.lower-section-header-img {
+dashboard-page .lower-section-header-img {
     margin-top: 10%;
     width: 100%;
 }
 
-.lower-section-header-img img {
+dashboard-page .lower-section-header-img img {
     width: 40%;
 }
 
-.friends-list {
+dashboard-page .friends-list {
     width: 55%;
     height: 76.5%;
     margin-top: 5%;
@@ -332,7 +327,7 @@ dashboard-page{
     scroll-snap-type: y mandatory;
 }
 
-.friend {
+dashboard-page .friend {
     position: relative;
     width: 100%;
     margin-top: 30px;
@@ -343,7 +338,7 @@ dashboard-page{
     scroll-snap-align: start;
 }
 
-.friend img {
+dashboard-page .friend img {
     aspect-ratio: 1/1;
     width: 100%;
 }
@@ -351,16 +346,16 @@ dashboard-page{
 
 /* ----------CENTER CONSOLE-------------- */
 
-.center-console {
+dashboard-page .center-console {
 	flex: 13;
 }
 
-#chatid  {
+chat-page  {
     width: 100%;
     height: 100%;
 }
 
-#gameid{
+game-page{
     width: 100%;
     height: 100%;
 }

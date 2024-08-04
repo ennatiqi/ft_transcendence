@@ -28,11 +28,20 @@ export const Routes = [
         path: '/contact',
         component: Contact
     },
-    {
-        path : '/dashboard',
-        children: [
-        ],
-    },
+    // {
+    //     path: '/dashboard',
+    //     component: Dash,
+    //     children: [
+    //         {
+    //             path: '/chat',
+    //             component: Chat
+    //         },
+    //         {
+    //             path: '/game',
+    //             component: Game
+    //         }
+    //     ]
+    // }
     {
         path: '/dashboard',
         component: Dash
@@ -72,13 +81,7 @@ class Router {
         {
             content_.innerHTML = '<dashboard-page></dashboard-page>';
             content_ = document.getElementById("dashscripte");
-            // content_.innerHTML = '';
-            // const help = new Dashboard;
-
-            // content_.appendChild(help);
-
         }
-        // else
         if (content_) {
             content_.appendChild(curr_page);
         }
@@ -93,7 +96,6 @@ class Router {
     }
 }
 export const router = new Router();
-// router.navigate(window.location.pathname);
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,3 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     router.navigate(window.location.pathname);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("click", e => {
+        console.log("waaay");
+        if (e.target.matches("a[data-link]")) {
+            e.preventDefault();
+            e.target.getAttribute('href');
+        }
+    });
+});
+

@@ -6,8 +6,8 @@ class MessageSerializer(serializers.ModelSerializer):
         model = Message
         fields = ['id', 'sender', 'receiver', 'content', 'time']
     
-    # def create(self, validated_data):
-    #     return Message.objects.create(**validated_data)
+    def create(self, validated_data):
+        return Message.objects.create(**validated_data)
 
     # def update(self, instance, validated_data):
     #     instance.sender = validated_data.get('sender', instance.sender)
