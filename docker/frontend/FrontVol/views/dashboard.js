@@ -51,52 +51,52 @@ export default class Dashboard extends HTMLElement {
                     </div>
                     <img class="upper-section-icone" src="../images/Vector.svg">
                     <div class="users-display overflow-style flex-col">
-                        <div class="user" style="background-color:#D9D9D9;">
+                        <div class="side-user" style="background-color:#D9D9D9;">
                             <img src="../images/users/happy-1.svg" alt="">
-                            <div class="user-status active "></div>
-                            <div class="user-ingame active"><p>in Game</p></div>
+                            <div class="user-status-side active "></div>
+                            <div class="user-ingame-side active"><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#F7C5BF;">
+                        <div class="side-user" style="background-color:#F7C5BF;">
                             <img src="../images/users/happy-2.svg" alt="">
-                            <div class="user-status active "></div>
-                            <div class="user-ingame active"><p>in Game</p></div>
+                            <div class="user-status-side active "></div>
+                            <div class="user-ingame-side active"><p>in Game</p></div>
                             
                         </div>
-                        <div class="user" style="background-color:#FF8A8A;">
+                        <div class="side-user" style="background-color:#FF8A8A;">
                             <img src="../images/users/happy-3.svg" alt="">
-                            <div class="user-status active "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side active "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                             
                         </div>
-                        <div class="user" style="background-color:#FFBEB8;">
+                        <div class="side-user" style="background-color:#FFBEB8;">
                             <img src="../images/users/happy-6.svg" alt="">
-                            <div class="user-status active "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side active "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#C5C6C6;">
+                        <div class="side-user" style="background-color:#C5C6C6;">
                             <img src="../images/users/happy-5.svg" alt="">
-                            <div class="user-status "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#CEC3FF;">
+                        <div class="side-user" style="background-color:#CEC3FF;">
                             <img src="../images/users/happy-4.svg" alt="">
-                            <div class="user-status "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#D9D9D9;">
+                        <div class="side-user" style="background-color:#D9D9D9;">
                             <img src="../images/users/happy-1.svg" alt="">
-                            <div class="user-status "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#F7C5BF;">
+                        <div class="side-user" style="background-color:#F7C5BF;">
                             <img src="../images/users/happy-2.svg" alt="">
-                            <div class="user-status "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
-                        <div class="user" style="background-color:#D9D9D9;">
+                        <div class="side-user" style="background-color:#D9D9D9;">
                             <img src="../images/users/happy-1.svg" alt="">
-                            <div class="user-status "></div>
-                            <div class="user-ingame "><p>in Game</p></div>
+                            <div class="user-status-side "></div>
+                            <div class="user-ingame-side "><p>in Game</p></div>
                         </div>
                     </div>
 
@@ -108,15 +108,15 @@ export default class Dashboard extends HTMLElement {
                         <div class="friends-list overflow-style">
                             <div class="friend" style="background-color: #D9D9D9;">
                                 <img src="../images/users/1_men.svg">
-                                <div class="user-status active"></div>
+                                <div class="user-status-side active"></div>
                             </div>
                             <div class="friend" style="background-color: #D9D9D9;">
                                 <img src="../images/users/2_men.svg">
-                                <div class="user-status"></div>
+                                <div class="user-status-side"></div>
                             </div>
                             <div class="friend" style="background-color: #D9D9D9;">
                                 <img src="../images/users/3_men.svg">
-                                <div class="user-status"></div>
+                                <div class="user-status-side"></div>
                             </div>
                         </div>
                 </div> 

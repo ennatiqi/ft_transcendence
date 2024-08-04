@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
-        console.log("waaay");
         if (e.target.matches("a[data-link]")) {
             e.preventDefault();
             e.target.getAttribute('href');

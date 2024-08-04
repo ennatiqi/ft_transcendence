@@ -46,7 +46,7 @@ fetch('http://localhost:8000/chat/users/')
     console.log('There was a problem with the fetch operation: ' + error.message);
 });
 
-
+// console.log(users);
 
 var usersDisplay = document.querySelector('.users-display');
 var searchDiv = document.getElementById('search');
@@ -151,12 +151,10 @@ function createUserComponent(user) {
         }
         var messagesContent = document.querySelector('.messages-content');
 
-        // Remove all child elements
         while (messagesContent.firstChild) {
             messagesContent.removeChild(messagesContent.firstChild);
         }
 
-        // Add new elements here
 
         var users = document.querySelectorAll('.user');
         users.forEach(function(user) {
@@ -178,6 +176,8 @@ function createUserComponent(user) {
     // userStatusDiv.className = "user-status active";
     // userDiv.appendChild(userStatusDiv);
 
+
+    //todo check if user in gane or not
     var userInGameDiv = document.createElement("div");
     userInGameDiv.className = "user-ingame active";
     var p = document.createElement("p");
@@ -185,13 +185,14 @@ function createUserComponent(user) {
     userInGameDiv.appendChild(p);
     userDiv.appendChild(userInGameDiv);
 
+
     var usernameDiv = document.createElement("div");
     usernameDiv.className = "username";
     var h1 = document.createElement("h1");
-    h1.textContent = user.username;
+    h1.textContent = user.name;
     usernameDiv.appendChild(h1);
     var p = document.createElement("p");
-    p.textContent = user.newMessages + " new messages";
+    p.textContent = "+2 new messages";
     usernameDiv.appendChild(p);
     userDiv.appendChild(usernameDiv);
 

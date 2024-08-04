@@ -15,7 +15,7 @@ chat-page .parent {
 
 chat-page .chat {
     width: 35%;
-    height: 100vh;
+    height: 100%;
     background-color: #00453F64;
     display: flex;
     flex-direction: column;
@@ -31,8 +31,7 @@ chat-page .chat .chattext {
 
 chat-page .user {
     position: relative;
-    width: 90%;
-    height: 40%;
+    /* width: 90%; */
     margin-top: 30px;
     border-radius: 50%;
     padding: 10px;
@@ -42,7 +41,7 @@ chat-page .user {
 
 chat-page .user.activeuser{
     background-color: #1a7264;
-    width: 83%;
+    width: 70%;
     border-radius: 24px;
     padding-bottom: 20px;
 }
@@ -61,7 +60,7 @@ chat-page .users-display {
 
 
 chat-page .user img {
-    width: 10%;
+    width: 18%;
     height: 90%;
     margin-right: 20px;
     background-color: #F7C5BF;
@@ -97,7 +96,7 @@ chat-page .user-ingame {
 }
 
 chat-page .user-ingame.active {
-    width: 10%;
+    width: 18%;
     height: 34%;
     background-color: #3DBDA7;
     position: absolute;
@@ -107,7 +106,7 @@ chat-page .user-ingame.active {
     align-items: center;
     color: white;
     font-size: 0.6vw;
-    bottom: 2%;
+    bottom: -10%;
 }
 
 
@@ -118,7 +117,7 @@ chat-page .flex-col {
 
 chat-page .user .username {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
     
 }
@@ -139,7 +138,7 @@ chat-page .user .username p {
 
 chat-page .text-chat {
     width: 60%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     background: radial-gradient(circle at top left, #053732, #006C6199, #0E867985, #3DBDA700);
     justify-content: center;
@@ -460,7 +459,7 @@ chat-page .search{
 
 }
 
-chat-page .triangle-1 {
+/* chat-page .triangle-1 {
     width: 20%;
     height: 80%;
     position: absolute;
@@ -469,6 +468,6 @@ chat-page .triangle-1 {
     background: radial-gradient(circle at top left, #053732, #006C6199, #0E867985, #3DBDA700);
     clip-path: polygon(0 0, 100% 0, 100% 100%);
 }
-
+ */
 
 

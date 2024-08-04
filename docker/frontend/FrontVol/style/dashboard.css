@@ -198,7 +198,7 @@ dashboard-page .upper-section-icone {
     margin-top: 10%;
 }
 
-dashboard-page .user {
+dashboard-page .side-user {
     aspect-ratio: 1/1;
     position: relative;
     width: 55%;
@@ -243,12 +243,12 @@ dashboard-page .users-display {
     scroll-snap-type: y mandatory;
 }
 
-dashboard-page .user img {
+dashboard-page .side-user img {
     width: 100%;
     position: relative;
 }
 
-dashboard-page .user-status {
+dashboard-page .user-status-side {
     position: absolute;
     top: 0;
     right: 0;
@@ -259,11 +259,11 @@ dashboard-page .user-status {
     background-color: #A5BAA9;
 }
 
-dashboard-page .user-status.active {
+dashboard-page .user-status-side.active {
     background-color: #36f00c;
 }
 
-dashboard-page .user-ingame.active {
+dashboard-page .user-ingame-side.active {
     width: 94%;
     height: 34%;
     background-color: #3DBDA7;
@@ -279,7 +279,7 @@ dashboard-page .user-ingame.active {
     bottom: -16%;
 }
 
-dashboard-page .user-ingame {
+dashboard-page .user-ingame-side {
     display: none;
 }
 
