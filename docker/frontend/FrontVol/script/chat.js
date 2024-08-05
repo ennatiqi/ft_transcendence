@@ -16,8 +16,36 @@ var usersDisplay = document.querySelector(".users-display");
 
 var users = [];
 
+var searchInput = document.querySelector('.search');
+var originalUsers = [];
 
-		
+searchInput.addEventListener('input', function() {
+    while (usersDisplay.firstChild) {
+        usersDisplay.removeChild(usersDisplay.firstChild);
+    }
+
+    if (searchInput.value) {
+        users = originalUsers.filter(function(user) {
+            return user.name.startsWith(searchInput.value);
+        });
+    } else {
+        users = [...originalUsers];
+    }
+
+    users.forEach(function(user) {
+        var userComponent = createUserComponent(user);
+        
+        usersDisplay.appendChild(userComponent);
+    });
+});
+
+
+
+
+
+
+
+
 fetch('http://localhost:8000/chat/users/')
 .then(response => {
     if (!response.ok) {
@@ -28,36 +56,80 @@ fetch('http://localhost:8000/chat/users/')
 .then(data => {
     data.forEach(user => {
         if (user.id != mydata.id)
-            users.push(user);
+            originalUsers.push(user);
     });
+    users = [...originalUsers];
     users.forEach(function(user) {
         var userComponent = createUserComponent(user);
+
+
+        fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${users[0].id}`)
+        .then(response => response.json())
+        .then(data => {
+            var messagesContent = document.querySelector('.messages-content');
+            data.forEach(message => {
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message.content;
+                            
+                if (message.sender === mydata.id) {
+                    newMessage.classList.add('message', 'my-messages', 'new');
+                } else {
+                    newMessage.classList.add('message', 'your-messages', 'new');
+                }
+
+                messagesContent.appendChild(newMessage);
+
+                insertTime(message.time)
+                
+            });
+            messagesContent.scrollTop = messagesContent.scrollHeight;
+    
+        });
+
+
         userComponent.addEventListener('click', function() {
             userdata = user.id;
+            fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${userdata}`)
+            .then(response => response.json())
+            .then(data => {
+                var messagesContent = document.querySelector('.messages-content');
+                data.forEach(message => {
+                    var newMessage = document.createElement('div');
+                    newMessage.textContent = message.content;
+                                
+                    if (message.sender === mydata.id) {
+                        newMessage.classList.add('message', 'my-messages', 'new');
+                    } else {
+                        newMessage.classList.add('message', 'your-messages', 'new');
+                    }
+
+                    messagesContent.appendChild(newMessage);
+
+                    insertTime(message.time)
+                    
+                });
+                messagesContent.scrollTop = messagesContent.scrollHeight;
+        
+    });
         });
+        
         usersDisplay.appendChild(userComponent);
     });
-
-})
-.then(data => {
-    console.log(data);
 })
 .catch(error => {
     console.log('There was a problem with the fetch operation: ' + error.message);
 });
 
-// console.log(users);
-
 var usersDisplay = document.querySelector('.users-display');
 var searchDiv = document.getElementById('search');
 
-usersDisplay.addEventListener('scroll', function() {
-    if (usersDisplay.scrollTop === 0) {
+// usersDisplay.addEventListener('scroll', function() {
+    // if (usersDisplay.scrollTop === 0) {
         searchDiv.style.display = 'flex';
-    } else {
-        searchDiv.style.display = 'none';
-    }
-});
+    // } else {
+    //     searchDiv.style.display = 'none';
+    // }
+// });
 
 
 function insertMessage() {
@@ -95,6 +167,7 @@ function insertMessage() {
     if (messages && newMessage && container.value) {
         messages.appendChild(newMessage);
     }
+    insertTime(new Date());
 
     var chatBox = document.querySelector('.messages-content');
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -141,7 +214,10 @@ function responcivefun(){
 function createUserComponent(user) {
     var userDiv = document.createElement("div");
     userDiv.className = "user";
-
+    var userslist = document.querySelectorAll('.user');
+    if(userslist.length > 0) {
+        userslist[0].classList.add('activeuser');
+    }
     userDiv.addEventListener('click', function() {
         responcivefun();
         
@@ -156,14 +232,13 @@ function createUserComponent(user) {
         }
 
 
-        var users = document.querySelectorAll('.user');
-        users.forEach(function(user) {
+        var userslist = document.querySelectorAll('.user');
+        userslist.forEach(function(user) {
             user.classList.remove('activeuser');
         });
 
         this.classList.add('activeuser');
 
-        changeContent();
     });
 
     
@@ -203,33 +278,6 @@ function createUserComponent(user) {
 
 
 
-async function changeContent()
-{
-    
-
-    fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${userdata}`)
-    .then(response => response.json())
-    .then(data => {
-        var messagesContent = document.querySelector('.messages-content');
-        data.forEach(message => {
-            var newMessage = document.createElement('div');
-            newMessage.textContent = message.content;
-                        
-            if (message.sender === mydata.id) {
-                newMessage.classList.add('message', 'my-messages', 'new');
-            } else {
-                newMessage.classList.add('message', 'your-messages', 'new');
-            }
-
-            messagesContent.appendChild(newMessage);
-
-            insertTime(message.time)
-            
-        });
-        messagesContent.scrollTop = messagesContent.scrollHeight;
-        
-    });
-}
 
 
 function insertTime(time) {

@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require('cors');
 const path = require("path");
 
 const app = express();
 
-
+app.use(cors({
+    allowedHeaders: ['Content-Type', 'X-CSRF-Token'],  // Allow 'X-CSRF-Token' header
+  }));
 
 app.use("/router", express.static(path.resolve(__dirname, ".", "router")));
 app.use("/views", express.static(path.resolve(__dirname, ".", "views")));

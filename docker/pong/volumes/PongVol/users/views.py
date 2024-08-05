@@ -2,18 +2,23 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from django.http import HttpResponseRedirect
+from django.db import IntegrityError
 from .models import User
 import jwt, datetime
-from django.shortcuts import render
-# Create your views here.
+from django.middleware.csrf import get_token
+from django.http import JsonResponse
 
 class RegisterView(APIView):
     def post(self, request):
-        serializer = UserSerializer(data = request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        try:
+            serializer = UserSerializer(data = request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        except IntegrityError as e:
+            return (Response({"detail": str(e)}))
+        except:
+            return Response({"detail": "Error at sign up!"})
+        return Response({"detail": "Sucessfully signed up"})
 
 class LoginView(APIView):
     def post(self, request):
@@ -30,11 +35,10 @@ class LoginView(APIView):
             'exp': datetime.datetime.utcnow() + datetime.timedelta(days=2),
             'iat': datetime.datetime.utcnow()
         }
-        # token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
         token  = jwt.encode(payload, 'secret', algorithm='HS256')
         response = Response()
         response.data = {
-            'message':'all good'
+            'detail':'connected'
         }
         # response = HttpResponseRedirect('/')
         response.set_cookie(key='jwt',value=token, httponly=True)
@@ -62,3 +66,21 @@ class LogoutView(APIView):
             'message':'success',
         }
         return response
+
+
+def csrf_token_view(request):
+    token = get_token(request)
+    return JsonResponse({'csrfToken': token})
+
+
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def data_to_only_logged_users(request):
+    # if request.user:
+    return JsonResponse({'message':"message for only logged on users that have the permition"})
+    # return JsonResponse({'message':"failed in the login check"})

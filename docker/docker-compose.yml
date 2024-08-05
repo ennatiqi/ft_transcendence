@@ -6,8 +6,6 @@ services:
     image: pong
     container_name: pong
     restart: always
-    depends_on:
-      - database
     volumes:
       - PongVol:/usr/src/app
     ports:
@@ -19,12 +17,14 @@ services:
     image: postgres:13
     container_name: database
     restart: always
+    ports:
+      - 5432:5432
     volumes:
       - DatabaseVol:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: example
-      POSTGRES_USER: user 
-      POSTGRES_DB: db_user
+      POSTGRES_USER: root 
+      POSTGRES_PASSWORD: rootroot
+      POSTGRES_DB: db_pong
     networks:
       - net
 
@@ -41,7 +41,6 @@ services:
       - 8080:8080
     networks:
       - net
-
   # rachid part
   adminer:
     image: adminer
@@ -60,27 +59,100 @@ services:
     networks:
       - net
 
-
 volumes:
   PongVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/PongVol
+      device: /Users/rennatiq/Desktop/mehdi/pong/volumes/PongVol
       o: bind
   DatabaseVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/DatabaseVol
+      device: /Users/rennatiq/Desktop/mehdi/pong/volumes/DatabaseVol
       o: bind
   FrontVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/frontend/FrontVol
+      device: /Users/rennatiq/Desktop/mehdi/frontend/FrontVol
       o: bind
-  
+
 
 networks:
   net:
+
+
+#   django:
+#     build: ./django
+#     image: django
+#     volumes:
+#       - gateway:/usr/src/app
+#     container_name: django
+#     restart: always
+#     ports:
+#       - 8000:8000
+#     depends_on:
+#       - db
+
+#   user_api:
+#     build: ./user_api
+#     image: user_api
+#     volumes:
+#       - vol_user_api:/usr/src/app
+#     container_name: userapi
+#     restart: always
+#     ports:
+#       - 8001:8000
+#     depends_on:
+#       - db
+
+#   db:
+#     image: postgres
+#     container_name: db
+#     restart: always
+#     ports:
+#       - 5432:5432
+#     volumes:
+#       - vol_db:/var/lib/postgresql/data
+#     environment:
+#       POSTGRES_PASSWORD: example
+#       POSTGRES_USER: user 
+#       POSTGRES_DB: db_name
+
+#   adminer:
+#     image: adminer
+#     container_name: adminer
+#     restart: always
+#     ports:
+#       - 8008:8080
+
+# volumes:
+#   gateway:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /Users/eboulhou/Desktop/docker_trans/volumes/gateway
+#       o: bind
+
+#   vol_user_api:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /Users/eboulhou/Desktop/docker_trans/volumes/user_api
+#       o: bind
+
+#   vol_db:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       device: /Users/eboulhou/Desktop/docker_trans/volumes/db
+#       o: bind
+
+
+  
+
+
+
+

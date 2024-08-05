@@ -1,5 +1,4 @@
 
-
 export default class Chat extends HTMLElement {
     constructor() {super()}
     connectedCallback() {

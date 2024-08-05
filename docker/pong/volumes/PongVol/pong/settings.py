@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-t-+d!r7qqkym$=5(lpn%)2u3(=ql(+ow$0dqw154)gk85psz72
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', "localhost"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -59,24 +59,6 @@ MIDDLEWARE = [
     'users.middleware.JWTAuthenticationMiddleware'
 ]
 
-# rachid
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",  # URL of your React app
-]
-CORS_ALLOWED_HEADERS = [
-    'content-type',
-    'authorization',
-]
-
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS',
-]
-
 
 ROOT_URLCONF = 'pong.urls'
 
@@ -96,7 +78,6 @@ TEMPLATES = [
     },
 ]
 
-# rachid
 WSGI_APPLICATION = 'pong.wsgi.application'
 ASGI_APPLICATION = 'pong.asgi.application'
 
@@ -116,9 +97,9 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_user',
-        'USER': 'user',
-        'PASSWORD': 'example',
+        'NAME': 'db_pong', 
+        'USERNAME': 'root', 
+        'PASSWORD': 'rootroot',
         'HOST': 'database',
         'PORT': '5432',
     }
@@ -173,3 +154,5 @@ AUTH_USER_MODEL = 'users.User'
 
 CORS_ALLOW_CREDENTIALS= True
 CORS_ORIGIN_ALLOW_ALL= True
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080/']
