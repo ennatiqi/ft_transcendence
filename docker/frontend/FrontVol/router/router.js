@@ -14,19 +14,23 @@ import Login from "../views/login.js";
 export const Routes = [
     {
         path: '/error404',
-        component: Error404
+        component: Error404,
+        auth: false
     },
     {
         path: '/',
-        component: Home
+        component: Home,
+        auth: false
     },
     {
         path: '/login',
-        component: Login
+        component: Login,
+        auth: false
     },
     {
         path: '/contact',
-        component: Contact
+        component: Contact,
+        auth: false
     },
     // {
     //     path: '/dashboard',
@@ -44,15 +48,18 @@ export const Routes = [
     // }
     {
         path: '/dashboard',
-        component: Dash
+        component: Dash,
+        auth: true
     },
     {
         path: '/dashboard/chat',
-        component: Chat
+        component: Chat,
+        auth: true
     },
     {
         path: '/dashboard/game',
-        component: Game
+        component: Game,
+        auth: true
     },
     
 ]
@@ -88,13 +95,35 @@ class Router {
     }
 
 
-    navigate(path) {
-
+    async navigate(path) {
+        const route = this.routes.find(route => route.path === path);
+        if (route && route.auth && !(await this.isAuthenticated())) {
+            // If the user is not authenticated, redirect to the login page
+            path = '/login';
+        }
+    
         this.active_path = path;
         this.route = this.routes.find(route => route.path === this.active_path);
         this.render();
     }
+    
+    async isAuthenticated() {
+        let mydata = null;
+        try {
+            const response = await fetch('http://localhost:8000/main/data/', {
+                method: "get",
+                credentials: "include"
+            });
+            mydata = await response.json();
+        } catch (error) {
+            console.error("Error:", error);
+        }
+        return mydata && mydata.id;
+    }
 }
+
+
+
 export const router = new Router();
 
 

@@ -64,19 +64,19 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/mehdi/pong/volumes/PongVol
+      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/PongVol
       o: bind
   DatabaseVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/mehdi/pong/volumes/DatabaseVol
+      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/DatabaseVol
       o: bind
   FrontVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/mehdi/frontend/FrontVol
+      device: /Users/rennatiq/Desktop/ft_transcendence/docker/frontend/FrontVol
       o: bind
 
 

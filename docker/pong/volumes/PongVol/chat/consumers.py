@@ -1,69 +1,69 @@
 import json
-
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.auth.models import User
-from asgiref.sync import sync_to_async
+from channels.db import database_sync_to_async
 from .models import Message
 from django.utils import timezone
+from users.models import User
 
-from django.contrib.sessions.models import Session
-from channels.db import database_sync_to_async
+
+from django.db.models import Q
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"chat_{self.room_name}"
+        self.sender = self.scope["url_route"]["kwargs"]["sender"]
+        self.receiver = self.scope["url_route"]["kwargs"]["receiver"]
+        self.room_group_name = f"chat_{self.sender}_{self.receiver}"
         
-        # get username
-        session_key = self.scope['cookies'].get('sessionid', None)
-        if session_key:
-            session = await database_sync_to_async(Session.objects.get)(session_key=session_key)
-            user_id = session.get_decoded().get('_auth_user_id')
-            user = await database_sync_to_async(User.objects.get)(id=user_id)
-            self.username = user.username
-        else:
-            self.username = 'Anonymous'
-
-
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
-
         await self.accept()
-
-        messages = await self.get_messages()
-        for message, username in messages:
-            await self.send(text_data=json.dumps({"message": message,"sender": username, "name": self.username }))
+        
+        
+        messages = await self.get_message()
+        for message in messages:
+            await self.send(text_data=json.dumps(message))
 
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
+        content = text_data_json["content"]
 
-        await self.save_message(self.username , message)
-        await self.channel_layer.group_send(
-            self.room_group_name, {"type": "chat.message", "message": message}
-        )
-    @sync_to_async
-    def save_message(self, username, message):
-        user = User.objects.get(username=username)
-        Message.objects.create(sender=user, content=message, time=timezone.now())
+        await self.save_message(self.sender, self.receiver, content)
 
-
+    @database_sync_to_async
+    def save_message(self, sender_id, receiver_id, content):
+        sender = User.objects.get(id=sender_id)
+        receiver = User.objects.get(id=receiver_id)
+        Message.objects.create(sender=sender, receiver=receiver, content=content, time=timezone.now())
+    
     async def chat_message(self, event):
-        content, username = await self.get_message()
-        await self.send(text_data=json.dumps({"message": content, "sender": username, "name": self.username}))
+        content = event["content"]
+        sender = event["sender"]
+        receiver = event["receiver"]
+        time = event["time"]
 
-    @sync_to_async
+        # await self.send(text_data=json.dumps({
+        #     "content": content,
+        #     "sender": sender,
+        #     "receiver": receiver,
+        #     "time": time
+        # }))
+
+
+
+
+    @database_sync_to_async
     def get_message(self):
-        message = Message.objects.order_by('-time').first()
-        if message is None:
-            return "", ""
-        return message.content, message.sender.username
+        messages = Message.objects.filter(
+            Q(sender=self.sender, receiver=self.receiver) | 
+            Q(sender=self.receiver, receiver=self.sender)
+        ).order_by('time')
 
-    @sync_to_async
-    def get_messages(self):
-        messages = Message.objects.order_by('time')
-        return [(message.content, message.sender.username) for message in messages]
-
-
+        return [{
+            "content": message.content, 
+            "sender": message.sender.id, 
+            "receiver": message.receiver.id, 
+            "time": str(message.time), 
+        } for message in messages]

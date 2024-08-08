@@ -64,7 +64,7 @@ document.getElementById('signInForm').addEventListener('submit', function(event)
 function check_password(){
 	let pass1 = document.getElementById("register_pass_1");
 	let pass2 = document.getElementById("register_pass_2");
-	console.log(pass1, "-------", pass2);
+	console.log(pass1.value, "-------", pass2.value);
 	if(pass1.value === pass2.value)
 		return 1;
 	else

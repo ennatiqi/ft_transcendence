@@ -16,7 +16,7 @@ volclean: down
 db:
 	docker exec -it database sh
 dj:
-	docker exec -it django sh
+	docker exec -it pong sh
 user_api_sh:
 	docker exec -it userapi sh
 auth:

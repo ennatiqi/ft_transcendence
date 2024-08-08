@@ -5,6 +5,6 @@ requests==2.32.3
 djangorestframework_simplejwt==5.3.1
 django-cors-headers==4.4.0
 
-daphne
-channels
-channels_redis
+daphne==3.0.2
+channels==3.0.4
+channels_redis==3.3.1

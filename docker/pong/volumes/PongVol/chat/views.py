@@ -15,24 +15,24 @@ from rest_framework import viewsets
 import json
 
 
-# do it in nother way
 from django.db.models import Q
 class MessageViewSet(viewsets.ViewSet):
-    def list(self, request):
-        senderId = request.GET.get('myId', None)
-        receiverId = request.GET.get('clickedId', None)
-
-        if senderId and receiverId:
+    def list(self, request, sender=None, receiver=None):
+        if sender and receiver:
             messages = Message.objects.filter(
-                Q(sender_id=senderId, receiver_id=receiverId) | 
-                Q(sender_id=receiverId, receiver_id=senderId)
+                Q(sender=sender, receiver=receiver) | 
+                Q(sender=receiver, receiver=sender)
             )
             serializer = MessageSerializer(messages, many=True)
             return Response(serializer.data)
         else:
-            return Response({"error": "Missing senderId or receiverId"}, status=400)
-    def create(self, request):
-        serializer = MessageSerializer(data=request.data)
+            return Response({"error": "Missing sender or receiver"}, status=400)
+
+    def create(self, request, sender=None, receiver=None):
+        data = request.data
+        data['sender'] = sender
+        data['receiver'] = receiver
+        serializer = MessageSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
