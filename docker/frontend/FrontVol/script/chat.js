@@ -3,6 +3,7 @@ var d, h, m, i = 0;
 var myuser;
 var userdata;
 let mydata;
+
 fetch('http://localhost:8000/main/data/',{
     method:"get",
     credentials:"include"
@@ -43,7 +44,7 @@ searchInput.addEventListener('input', function() {
 
 
 
-var socket;
+
 
 
 fetch('http://localhost:8000/chat/users/')
@@ -59,73 +60,64 @@ fetch('http://localhost:8000/chat/users/')
             originalUsers.push(user);
     });
     users = [...originalUsers];
-    users.forEach(function(user) {
-        var userComponent = createUserComponent(user);
+    if (users[0].id)
+    {
 
-        userdata = users[0].id;
-        if (socket) {
-            socket.close();
-        }
-        socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
-
-        socket.onmessage = function(event) {
-            var data = JSON.parse(event.data);
+        fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${users[0].id}`)
+        .then(response => response.json())
+        .then(data => {
             var messagesContent = document.querySelector('.messages-content');
-            var newMessage = document.createElement('div');
-            newMessage.textContent = data.content;
-            if (data.sender == mydata.id) {
-                newMessage.classList.add('message', 'my-messages', 'new');
-            } else {
-                newMessage.classList.add('message', 'your-messages', 'new');
-            }
-
-            messagesContent.appendChild(newMessage);
-            insertTime(data.time);
-            messagesContent.scrollTop = messagesContent.scrollHeight;
-        };
-
-        socket.onclose = function(event) {
-            console.log('Socket closed connection: ', event);
-        };
-
-        socket.onerror = function(error) {
-            console.log('Socket error: ', error);
-        };
-
-        userComponent.addEventListener('click', function() {
-            if (userdata === user.id)
-                return;
-            if (socket) {
-                socket.close();
-            }
-            userdata = user.id;
-            
-            socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
-
-            socket.onmessage = function(event) {
-                var data = JSON.parse(event.data);
-                var messagesContent = document.querySelector('.messages-content');
+            data.forEach(message => {
                 var newMessage = document.createElement('div');
-                newMessage.textContent = data.content;
+                newMessage.textContent = message.content;
                 
-                if (data.sender == mydata.id) {
+                if (message.sender === mydata.id) {
                     newMessage.classList.add('message', 'my-messages', 'new');
                 } else {
                     newMessage.classList.add('message', 'your-messages', 'new');
                 }
-
+                
                 messagesContent.appendChild(newMessage);
-                insertTime(data.time);
+                
+                insertTime(message.time)
+                
+            });
+            messagesContent.scrollTop = messagesContent.scrollHeight;
+            
+        });
+    }
+    users.forEach(function(user) {
+        var userComponent = createUserComponent(user);
+
+        userdata = users[0].id;
+
+
+        userComponent.addEventListener('click', function() {
+            
+            userdata = user.id;
+            fetch(`http://localhost:8000/chat/chat/?myId=${mydata.id}&clickedId=${userdata}`)
+            .then(response => response.json())
+            .then(data => {
+                var messagesContent = document.querySelector('.messages-content');
+                data.forEach(message => {
+                    
+                    var newMessage = document.createElement('div');
+                    newMessage.textContent = message.content;
+                                
+                    if (message.sender === mydata.id) {
+                        newMessage.classList.add('message', 'my-messages', 'new');
+                    } else {
+                        newMessage.classList.add('message', 'your-messages', 'new');
+                    }
+
+                    messagesContent.appendChild(newMessage);
+
+                    insertTime(message.time)
+                    
+                });
                 messagesContent.scrollTop = messagesContent.scrollHeight;
-            };
-
-            socket.onclose = function(event) {
-                console.log('Socket closed connection: ', event);
-            };
-
-            socket.onerror = function(error) {
-                console.log('Socket error: ', error);
-            };
+        
+    });
         });
         
         usersDisplay.appendChild(userComponent);
@@ -146,42 +138,55 @@ var searchDiv = document.getElementById('search');
     // }
 // });
 
+var socket;
 
 function insertMessage() {
     var container = document.querySelector('.message-input');
+    
+    if (!container.value)
+    return;
+let datasend = {
+    sender: mydata.id,
+    receiver: userdata,
+    content: container.value,
+    time: new Date().toISOString()
+};
+// socket.close();
+
+if (!socket)
+{
+    if (mydata.id > userdata)
+        socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
+    else
+        socket = new WebSocket(`ws://localhost:8000/ws/chat/${userdata}/${mydata.id}/`);
+}
+socket.onopen = function(e) {
+};
+if (socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(datasend));
+}
+
+socket.onmessage = function(event) {
+    console.log('Received:', event.data);
+    var data = JSON.parse(event.data);
+    var messagesContent = document.querySelector('.messages-content');
     var newMessage = document.createElement('div');
-    newMessage.innerHTML = container.value;
-
-    socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
-
-
-    let data = {
-        sender: mydata.id,
-        receiver: userdata,
-        content: container.value,
-        time: new Date().toISOString()
-    };
+    newMessage.textContent = data.content;
     
-    socket.onopen = function(e) {
-        socket.send(JSON.stringify(data));
-    };
-    
-    socket.onmessage = function(event) {
-        console.log('Received:', event.data);
-    };
-    
-    socket.onerror = function(error) {
-        console.error('Error:', error);
-    };
-
-    newMessage.classList.add('message', 'my-messages', 'new');
-    if (messages && newMessage && container.value) {
-        messages.appendChild(newMessage);
+    if (data.sender == mydata.id) {
+        newMessage.classList.add('message', 'my-messages', 'new');
+    } else {
+        newMessage.classList.add('message', 'your-messages', 'new');
     }
-    insertTime(new Date());
 
-    var chatBox = document.querySelector('.messages-content');
-    chatBox.scrollTop = chatBox.scrollHeight;
+    messagesContent.appendChild(newMessage);
+    insertTime(data.time);
+    messagesContent.scrollTop = messagesContent.scrollHeight;
+};
+
+socket.onerror = function(error) {
+    console.error('Error:', error);
+};
 }
 
 document.querySelector('.message-submit').addEventListener('click', function() {
@@ -227,7 +232,7 @@ function createUserComponent(user) {
     userDiv.className = "user";
     var userslist = document.querySelectorAll('.user');
     if(userslist.length > 0) {
-        userslist[0].classList.add('activeuser');
+        userslist[1].classList.add('activeuser');
     }
     userDiv.addEventListener('click', function() {
         responcivefun();
@@ -304,7 +309,9 @@ function insertTime(time) {
     if (differenceInMinutes < 1) {
         timestamp.textContent = "Just now";
     } else {
-        timestamp.textContent = messageTime.toLocaleTimeString();
+        var minutes = messageTime.getMinutes();
+        var seconds = messageTime.getSeconds();
+        timestamp.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
     }
 
     var lastMessage = document.querySelector('.message:last-child');

@@ -187,12 +187,17 @@ chat-page .messages .message {
     position: relative;
 }
 
-chat-page .messages .my-messages .timestamp {
+chat-page .timestamp {
+    width: 100%;
     position: absolute;
-    bottom: -15px;
+    bottom: -18px;
     font-size: 12px;
-    right: 20px;
+    right: 10px;
     color: rgba(255, 255, 255, .3);
+    text-align: right;
+}
+chat-page  .your-messages .timestamp {
+    text-align: left;
 }
 
 chat-page .messages .my-messages {
@@ -233,12 +238,7 @@ chat-page .messages .your-messages::before {
     bottom: -4px;
 }
 
-chat-page .messages .your-messages .timestamp {
-    position: absolute;
-    bottom: -15px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, .3);
-}
+
 
 chat-page .messages .message:last-child {
     margin-bottom: 30px;
@@ -367,7 +367,7 @@ chat-page .search{
         margin-left: 10px;
     }
     
-    chat-page .messages .my-messages .timestamp {
+    chat-page .timestamp {
         font-size: 8px;
     }
     
@@ -405,9 +405,7 @@ chat-page .search{
         bottom: -4px;
     }
     
-    chat-page .messages .your-messages .timestamp {
-        font-size: 8px;
-    }
+
     
     chat-page .messages .message:last-child {
         margin-bottom: 20px;
