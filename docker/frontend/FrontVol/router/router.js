@@ -68,45 +68,61 @@ class Router {
     constructor() {
         this.routes = Routes;
         this.active_path = window.location.pathname;
-        this.route  = this.routes.find(route => route.path === this.active_path);
+        this.route = this.matchRoute(this.active_path);
+        
+        // Handle browser navigation (back/forward)
+        window.addEventListener("popstate", () => {
+            this.active_path = window.location.pathname;
+            this.route = this.matchRoute(this.active_path);
+            this.render();
+        });
     }
-    
-    
+
+    matchRoute(path) {
+        return this.routes.find(route => {
+            const regex = this.pathToRegex(route.path);
+            return regex.test(path);
+        });
+    }
+
+    pathToRegex(path) {
+        const pattern = path.replace(/:[^\s/]+/g, '([^\\s/]+)');
+        return new RegExp(`^${pattern}$`);
+    }
+
     render() {
         if (!this.route) {
             this.route = this.routes.find(route => route.path === "/error404");
         }
-        if (this.active_path != window.location.pathname) {
-            window.history.pushState({}, "", this.active_path);
-        }
 
         const curr_page = new this.route.component();
-        
         let content_ = document.getElementById("app");
         content_.innerHTML = '';
-        if (this.active_path === "/dashboard/chat" || this.active_path === "/dashboard/game" || this.active_path === "/dashboard")
-        {
+
+        if (this.active_path.startsWith("/dashboard")) {
             content_.innerHTML = '<dashboard-page></dashboard-page>';
             content_ = document.getElementById("dashscripte");
         }
+
         if (content_) {
             content_.appendChild(curr_page);
         }
     }
 
-
     async navigate(path) {
-        const route = this.routes.find(route => route.path === path);
+        const route = this.matchRoute(path);
         if (route && route.auth && !(await this.isAuthenticated())) {
-            // If the user is not authenticated, redirect to the login page
             path = '/login';
         }
-    
+
         this.active_path = path;
-        this.route = this.routes.find(route => route.path === this.active_path);
+        this.route = this.matchRoute(this.active_path);
+
+        // Update URL and render without reloading
+        window.history.pushState({}, "", this.active_path);
         this.render();
     }
-    
+
     async isAuthenticated() {
         let mydata = null;
         try {
@@ -122,10 +138,7 @@ class Router {
     }
 }
 
-
-
 export const router = new Router();
-
 
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
@@ -136,13 +149,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     router.navigate(window.location.pathname);
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("click", e => {
-        if (e.target.matches("a[data-link]")) {
-            e.preventDefault();
-            e.target.getAttribute('href');
-        }
-    });
-});
-

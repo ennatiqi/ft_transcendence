@@ -39,6 +39,8 @@ class MessageViewSet(viewsets.ViewSet):
         return Response(serializer.errors, status=400)
 
 
+
+
 class UserView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
