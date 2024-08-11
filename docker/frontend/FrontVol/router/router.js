@@ -8,6 +8,7 @@ import Dash from "../views/dash.js";
 import Game from "../views/game.js";
 import Home from "../views/home.js";
 import Login from "../views/login.js";
+import Loading from "../views/loading.js";
 
 
 
@@ -61,6 +62,11 @@ export const Routes = [
         component: Game,
         auth: true
     },
+    {
+        path: '/loading',
+        component: Loading,
+        auth: false
+    },
     
 ]
 
@@ -110,17 +116,34 @@ class Router {
     }
 
     async navigate(path) {
+        this.route = this.routes.find(route => route.path === "/loading");
+        this.render();
+
+        const route = await this.loadDataForRoute(path);
+
+        
+        window.history.pushState({}, "", this.active_path);
+        this.route = route;
+        this.render();
+    }
+    async loadDataForRoute(path) {
+
+        if (path.endsWith('/') && path != '/') {
+            path = path.slice(0, -1);
+        }
+
         const route = this.matchRoute(path);
+        
+        if (route && route.path === '/login' && route.path === '/' && await this.isAuthenticated())
+            path = '/dashboard';
         if (route && route.auth && !(await this.isAuthenticated())) {
             path = '/login';
         }
 
+    
         this.active_path = path;
-        this.route = this.matchRoute(this.active_path);
-
-        // Update URL and render without reloading
-        window.history.pushState({}, "", this.active_path);
-        this.render();
+    
+        return this.matchRoute(this.active_path);
     }
 
     async isAuthenticated() {
@@ -140,11 +163,22 @@ class Router {
 
 export const router = new Router();
 
+
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", e => {
-        if (e.target.matches("[data-link]")) {
+        const aTag = e.target.closest('a[data-link]');
+        if (aTag) {
             e.preventDefault();
-            router.navigate(e.target.getAttribute('href'));
+            router.navigate(aTag.getAttribute('href'));
+        }
+        const btnSimple = e.target.closest('.btn-simple');
+        if (btnSimple) {
+            console.log("holla");
+            document.querySelectorAll('.btn-highlight').forEach(el => {
+                el.classList.remove('btn-highlight');
+            });
+
+            btnSimple.classList.add('btn-highlight');
         }
     });
     router.navigate(window.location.pathname);

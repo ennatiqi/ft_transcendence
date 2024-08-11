@@ -125,6 +125,9 @@ dashboard-page .nav-options {
 dashboard-page .nav-options img {
     width: 50%;
 }
+dashboard-page .btn-simple {
+    background-color: rgba(0, 0, 0, 0);
+}
 
 dashboard-page .btn-option.btn-highlight img {
     width: 60%;
@@ -137,9 +140,6 @@ dashboard-page .btn-highlight {
     box-shadow: 0 0 30px #3DBDA7;
 }
 
-dashboard-page .btn-simple {
-    background-color: rgba(0, 0, 0, 0);
-}
 
 dashboard-page .btn-option {
     aspect-ratio: 1/1;

@@ -21,9 +21,7 @@ class GetLastMessage(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
-    async def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-    
+  
     async def chat_message(self, event):
         message = await self.get_message()
         if message:

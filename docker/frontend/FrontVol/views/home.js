@@ -22,7 +22,7 @@ export default class Home extends HTMLElement {
                             <div class="login">
                                 <h1>PingPongParadise</h1>
                                 <h3>Play it now</h3>
-                                <button href="/login" class="nav__link" data-link >Login</button>
+                                <a href="/login" class="nav__link" data-link >Login</a>
                             </div>
                             <div class="image">
                                 <img src="../images/OBJECTS.svg" alt="" srcset="">

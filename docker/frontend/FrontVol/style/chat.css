@@ -183,7 +183,7 @@ chat-page .messages .message {
     background-color: #FFFFFF;
     font-size: 11px;
     line-height: 1.4;
-    margin-left: 35px;
+    margin: 0 35px 35px 35px ;
     position: relative;
 }
 

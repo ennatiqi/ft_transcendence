@@ -36,3 +36,14 @@ function logoutRequest()
     })
     
 }
+
+fetch('http://localhost:8000/main/data/',{
+    method:"get",
+    credentials:"include"
+})
+.then(response => response.json())
+.then(data => {
+        document.getElementById('user_name').innerHTML = data.user_name;
+})
+
+

@@ -2,8 +2,8 @@ var messages = document.querySelector('.messages-content');
 var d, h, m, i = 0;
 var myuser;
 var userdata;
-let mydata;
-let socket;
+var mydata;
+var socket;
 
 fetch('http://localhost:8000/main/data/',{
     method:"get",

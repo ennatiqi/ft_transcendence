@@ -1,4 +1,4 @@
-// Get all the start game text elements
+
 let startGameElements = document.querySelectorAll('.start-game h2');
 let gameover = document.querySelectorAll('.game-over h2');
 let ball_ = document.querySelectorAll('.ball');
