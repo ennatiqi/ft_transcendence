@@ -6,7 +6,8 @@ from django.template.loader import render_to_string
 
 
 def Mainview(request):
-    if request.user is not None:
+    # return JsonResponse({"ret":request.user.is_anonymous})
+    if not request.user.is_anonymous:
         user = request.user.name
     else:
         return redirect('login')
@@ -19,7 +20,7 @@ def HomeView(request):
     return JsonResponse({'content':string, 'css':css, 'js':js})
 
 def LoginView(request):
-    if request.user is not None:
+    if request.user.is_authenticated:
         return redirect('main')
     return render(request, 'login.html')
 
@@ -33,7 +34,7 @@ def DataView(request):
     user_name = None
     uid = None
     email = None
-    if request.user is not None:
+    if request.user.is_authenticated:
         uid = request.user.id
         email = request.user.email
         user_name = request.user.name

@@ -6,6 +6,8 @@ services:
     image: pong
     container_name: pong
     restart: always
+    depends_on:
+      - database
     volumes:
       - PongVol:/usr/src/app
     ports:
@@ -29,17 +31,19 @@ services:
       - net
 
   frontend:
-    image: nginx:1.27.0
-    container_name: frontend
-    restart: always
-    volumes:
-      - FrontVol:/usr/share/nginx/html
-    ports:
-      - 8080:80
-    networks:
-      - net
-  # rachid part
+      image: nginx:1.27.0
+      container_name: frontend
+      restart: always
+      volumes:
+        - ./frontend/nginx.conf:/etc/nginx/nginx.conf:ro
+        - FrontVol:/usr/share/nginx/html
+      ports:
+        - 8080:80
+      networks:
+        - net
 
+
+  # rachid part
   adminer:
     image: adminer
     container_name: adminer
@@ -62,19 +66,19 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/PongVol
+      device: /Users/rennatiq/Desktop/mgdi/pong/volumes/PongVol
       o: bind
   DatabaseVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/pong/volumes/DatabaseVol
+      device: /Users/rennatiq/Desktop/mgdi/pong/volumes/DatabaseVol
       o: bind
   FrontVol:
     driver: local
     driver_opts:
       type: none
-      device: /Users/rennatiq/Desktop/ft_transcendence/docker/frontend/FrontVol
+      device: /Users/rennatiq/Desktop/mgdi/frontend/FrontVol
       o: bind
 
 

@@ -20,6 +20,9 @@ export default class Dashboard extends HTMLElement {
                     <a href="/dashboard/chat" class="btn-option flex-center btn-simple  nav__link" data-link>
                         <img src="../images/Sms.svg">
                     </a>
+                    <a href="/dashboard/settings" class="btn-option flex-center btn-simple  nav__link" data-link>
+                        <img src="../images/Sms.svg">
+                    </a>
                 </div> 
                 <a href="/" data-link  class="nav__link logout flex-center">
                     <img src="../images/Logout.svg">

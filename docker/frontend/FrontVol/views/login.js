@@ -8,10 +8,16 @@ export default class Login extends HTMLElement {
             this.innerHTML = data;
 
             let script = document.createElement('script');
-            script.src = '../script/login.js';
+            script.src = '../script/scripte.js';
             document.body.appendChild(script);
         });
     }
 }
 
 customElements.define("login-page", Login);
+
+
+
+
+
+

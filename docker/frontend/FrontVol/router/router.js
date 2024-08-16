@@ -9,6 +9,7 @@ import Game from "../views/game.js";
 import Home from "../views/home.js";
 import Login from "../views/login.js";
 import Loading from "../views/loading.js";
+import Settings from "../views/settings.js";
 
 
 
@@ -50,23 +51,29 @@ export const Routes = [
     {
         path: '/dashboard',
         component: Dash,
-        auth: true
+        auth: false
     },
     {
         path: '/dashboard/chat',
         component: Chat,
-        auth: true
+        auth: false
     },
     {
         path: '/dashboard/game',
         component: Game,
-        auth: true
+        auth: false
     },
     {
         path: '/loading',
         component: Loading,
         auth: false
     },
+    {
+        path: '/dashboard/settings',
+        component: Settings,
+        auth: false
+    },
+    
     
 ]
 
