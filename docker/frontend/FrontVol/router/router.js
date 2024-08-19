@@ -51,27 +51,27 @@ export const Routes = [
     {
         path: '/dashboard',
         component: Dash,
-        auth: false
+        auth: true
     },
     {
         path: '/dashboard/chat',
         component: Chat,
-        auth: false
+        auth: true
     },
     {
         path: '/dashboard/game',
         component: Game,
-        auth: false
+        auth: true
     },
     {
         path: '/loading',
         component: Loading,
-        auth: false
+        auth: true
     },
     {
         path: '/dashboard/settings',
         component: Settings,
-        auth: false
+        auth: true
     },
     
     

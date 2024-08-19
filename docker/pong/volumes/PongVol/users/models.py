@@ -9,6 +9,8 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     username = models.CharField(max_length=255, unique=True, default='default_name')
     
+    #    rachid
+    avatar = models.URLField(null=True, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

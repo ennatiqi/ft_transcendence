@@ -30,18 +30,28 @@ def GameView(request):
     js = 'static/js/game.js'
     return JsonResponse({'content':string, 'css': css, 'js': js})
 
+# grghas rachid
 def DataView(request):
     user_name = None
+    username = None
+    first_name = None
+    last_name = None
     uid = None
     email = None
     if request.user.is_authenticated:
         uid = request.user.id
         email = request.user.email
         user_name = request.user.name
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+        username = request.user.username
     data = JsonResponse({
         'message':'message from DataView',
         'user_name': user_name,
         'id': uid,
-        'email': email
+        'email': email,
+        'first_name': first_name,
+        'last_name': last_name,
+        'username': username,
     })
     return data

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'daphne',
     'channels',
     'chat',
+    'settings',
     # rachid
     'django.contrib.admin',
     'django.contrib.auth',

@@ -4,6 +4,12 @@ settings-page .center-console{
 	justify-content: center;
  
 }
+settings-page .message{
+	color: rgb(135, 6, 6);
+}
+settings-page .good{
+	color: rgb(7, 184, 25);
+}
 settings-page .settings-frame {
 	width: 80%;
 	height: 80%;

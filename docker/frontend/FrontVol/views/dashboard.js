@@ -125,6 +125,7 @@ export default class Dashboard extends HTMLElement {
             </div>
         </div>
         <script src="../script/dashboard.js"></script>
+        
         `;
 
 
