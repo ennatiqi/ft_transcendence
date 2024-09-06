@@ -37,10 +37,10 @@ document.getElementById('signInForm').addEventListener('submit', function(event)
 	console.log("submit form checked in!");
 	// Prevent the default form submission
 	event.preventDefault();
-	
+
 	// Get the form data
 	var formData = new FormData(event.target);
-	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	const csrfToken = getCookie("csrf-token");
 	
 	// Send the form data using fetch
 	fetch('/api/login/', {
@@ -51,11 +51,14 @@ document.getElementById('signInForm').addEventListener('submit', function(event)
 			'X-CSRFToken':csrfToken
 		}
 	})
-	.then(response => response.json())  // Parse the JSON from the response
+	.then(response => {
+		if(response.redirected){
+			window.location.href = response.url;
+		}
+		return response.json();
+	})
 	.then(data => {
-		// Handle the data from the response
 		showMessage(data.detail, "signInMessage");
-
 		console.log(data);
 	})
 	.catch(error => console.error('Error:', error));
@@ -88,7 +91,7 @@ document.getElementById('signUpForm').addEventListener('submit', function(event)
 
 	// Get the form data
 	var formData = new FormData(event.target);
-	const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+	const csrfToken = getCookie("csrf-token");
 	console.log("check password: ", check_password());
 	if(check_password())
 	{
@@ -141,7 +144,7 @@ fetchCsrfToken().then(csrfToken => {
 	
 
 	document.querySelector('meta[name="csrf-token"]').setAttribute('content', csrfToken);
-
+	
 	console.log(csrfToken);
 });
 
@@ -153,9 +156,10 @@ function google_auth(){
 		const redirectUri = 'http://localhost:8080/accounts/google/login/callback/';
 		const scope = 'profile email';
 		const responseType = 'code';
-		
+
 		const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
-		window.location.href = googleAuthUrl;
+		console.log(googleAuthUrl)
+		// window.location.href = googleAuthUrl;
 
 }
 

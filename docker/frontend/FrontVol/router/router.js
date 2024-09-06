@@ -9,7 +9,9 @@ import Game from "../views/game.js";
 import Home from "../views/home.js";
 import Login from "../views/login.js";
 import Loading from "../views/loading.js";
+import OTP from "../views/otp.js"
 import Settings from "../views/settings.js";
+
 
 
 
@@ -17,6 +19,11 @@ export const Routes = [
     {
         path: '/error404',
         component: Error404,
+        auth: false
+    },
+    {
+        path: '/otp',
+        component: OTP,
         auth: false
     },
     {
@@ -64,16 +71,15 @@ export const Routes = [
         auth: true
     },
     {
-        path: '/loading',
-        component: Loading,
-        auth: true
-    },
-    {
         path: '/dashboard/settings',
         component: Settings,
         auth: true
     },
-    
+    {
+        path: '/loading',
+        component: Loading,
+        auth: false
+    },
     
 ]
 
@@ -190,3 +196,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     router.navigate(window.location.pathname);
 });
+

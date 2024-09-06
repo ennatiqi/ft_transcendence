@@ -11,7 +11,7 @@ export default class Home extends HTMLElement {
                     <header>
                         <img class="logo" src="../images/SVGRepo_iconCarrier.svg" alt="">
                         <div class="header-right">
-                            <a href="/">home</a>
+                            <a href="/">Home</a>
                             <a   href="#about">About</a>
                             <a  href="/dashboard" class="nav__link" data-link>Contact</a>
                             <a href="/login" class="nav__link" data-link>login</a>

@@ -74,9 +74,11 @@ fetch('http://localhost:8000/chat/users/')
     
     users.forEach(function(user) {
         var userComponent = createUserComponent(user, mydata.id, user.id);
-        
+
         userComponent.addEventListener('click', function() {
+            
             userdata = user.id;
+
             opensocket(mydata, userdata);
             fetchdata(socket, mydata, userdata);
             
@@ -134,11 +136,14 @@ function opensocket(mydata, userdata)
     if (socket) {
         socket.close();
     }
-    if (mydata.id > userdata)
-        socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
-        
-    else
-        socket = new WebSocket(`ws://localhost:8000/ws/chat/${userdata}/${mydata.id}/`);
+    // if (!socket)
+    // {
+        if (mydata.id > userdata)
+            socket = new WebSocket(`ws://localhost:8000/ws/chat/${mydata.id}/${userdata}/`);
+            
+        else
+            socket = new WebSocket(`ws://localhost:8000/ws/chat/${userdata}/${mydata.id}/`);
+    // }
     socket.onopen = function(e) {
         console.log("socket open");
     };
@@ -233,13 +238,16 @@ function createUserComponent(user,myId,clickedId) {
     }
     userDiv.addEventListener('click', function() {
         responcivefun();
-        var messagesContent = document.querySelector('.messages-content');
         
+
+        if (this.classList.contains('activeuser')) {
+            return;
+        }
+        var messagesContent = document.querySelector('.messages-content');
+
         while (messagesContent.firstChild) {
             messagesContent.removeChild(messagesContent.firstChild);
         }
-        if (this.classList.contains('activeuser'))
-            return;
 
 
         var userslist = document.querySelectorAll('.user');
@@ -262,6 +270,7 @@ function createUserComponent(user,myId,clickedId) {
     // userDiv.appendChild(userStatusDiv);
 
 
+    //todo check if user in gane or not
     var userInGameDiv = document.createElement("div");
     userInGameDiv.className = "user-ingame active";
     var p = document.createElement("p");
