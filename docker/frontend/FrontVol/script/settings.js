@@ -32,6 +32,7 @@ var lastnameInput = document.getElementById('lastname');
 var usernameInput = document.getElementById('username');
 function ensertdata(mydata)
 {
+    console.log(mydata);
     if (mydata && mydata.first_name) {
         firstnameInput.placeholder = mydata.first_name;
     } else {

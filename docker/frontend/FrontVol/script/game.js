@@ -1,3 +1,4 @@
+console.log("sas");
 
 let startGameElements = document.querySelectorAll('.start-game h2');
 let gameover = document.querySelectorAll('.game-over h2');
@@ -27,8 +28,7 @@ const ball = document.querySelector('.ball');
 
 const leftRacket = document.querySelector('.left-racket img');
 const rightRacket = document.querySelector('.right-racket img');
-let leftRacketRect;
-let rightRacketRect;
+
 
 let boardWidth = gameBoard.clientWidth;
 let boardHeight = gameBoard.clientHeight;

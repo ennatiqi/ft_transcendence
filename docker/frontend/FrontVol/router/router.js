@@ -89,6 +89,7 @@ class Router {
         this.active_path = window.location.pathname;
         this.route = this.matchRoute(this.active_path);
         
+
         // Handle browser navigation (back/forward)
         window.addEventListener("popstate", () => {
             this.active_path = window.location.pathname;
@@ -96,6 +97,7 @@ class Router {
             this.render();
         });
     }
+
 
     matchRoute(path) {
         return this.routes.find(route => {
@@ -184,13 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             router.navigate(aTag.getAttribute('href'));
         }
-        const btnSimple = e.target.closest('.btn-simple');
-        if (btnSimple) {
-            console.log("holla");
+        if (e.target.classList.contains('btn-simple')) {
+            const btnSimple = e.target;
+        
             document.querySelectorAll('.btn-highlight').forEach(el => {
                 el.classList.remove('btn-highlight');
             });
-
+        
             btnSimple.classList.add('btn-highlight');
         }
     });
